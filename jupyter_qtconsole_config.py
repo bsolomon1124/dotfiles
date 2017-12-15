@@ -49,3 +49,16 @@ c.FrontendWidget.confirm_restart = True
 #      2. Pygments: .c, .k, .o, etc. (see PygmentsHighlighter)
 #      3. QtConsole: .error, .in-prompt, .out-prompt, etc
 #c.JupyterWidget.style_sheet = ''
+
+## If not empty, use this Pygments style for syntax highlighting.
+# Otherwise, the style sheet is queried for Pygments
+# style information.
+c.JupyterWidget.syntax_style = "monokai"
+
+# Full list:
+# manni, igor, xcode, vim, autumn, vs, rrt, native, perldoc, borland,
+# tango, emacs, friendly, monokai, paraiso-dark, colorful, murphy
+# bw, pastie, paraiso-light, trac, default, fruity
+
+# Blackscreen:
+# vim, monokai, rrt, native, paraiso-dark
