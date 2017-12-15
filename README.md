@@ -1,2 +1,2 @@
 # config
-Customized configuration &amp; startup files
+Miscellaneous configuration &amp startup files for IPython, Jupyter Qt, & Python libraries
