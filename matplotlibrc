@@ -54,6 +54,7 @@
 
 
 backend : Qt5Agg
+interactive  : True
 
 
 ### LINES
