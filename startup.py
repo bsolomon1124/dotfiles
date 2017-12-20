@@ -16,16 +16,8 @@ def startup():
                and key not in excl]
     print('Namespace:', ', '.join(imports))
 
-    # Make sure network drive exists.
-    # If it does, map to it and try cd'ing to it.
-    if not os.path.exists('Z:'):
-        print(r'Mapping \\na2prod\userdocs\bsolomon to Z:.')
-        if not os.path.exists(r'\\na2prod\userdocs'):
-            print("Cannot map; directory doesn't exist.")
-        else:
-            os.system(r'net use Z: \\na2prod\userdocs\bsolomon')
     try:
-        os.chdir('Z:/_python')
+        os.chdir(os.path.expanduser('~') + '/Scripts/python')
     except FileNotFoundError:
         pass
     print('Current directory:', os.getcwd())
@@ -49,7 +41,7 @@ def startup():
             'expand_frame_repr': False,
             'max_rows': 25,
             'max_seq_items': 50,
-            'precision': 3,
+            'precision': 4,
             'show_dimensions': False
             },
         'mode': {
@@ -71,7 +63,7 @@ def startup():
     #     suppress=False, threshold=1000, formatter=None)
 
     np.set_printoptions(
-        precision=3,
+        precision=4,
         threshold=625,
         edgeitems=10,
         )
