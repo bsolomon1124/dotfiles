@@ -10,6 +10,7 @@ import scipy.stats as scs  # NOQA
 
 
 def startup():
+
     # Just a convenience msg on startup: "Namespace: os, plt, np, pd, scs"
     excl = ('In', 'Out', 'get_ipython', 'exit', 'quit', 'excl', 'startup')
     imports = [key for key in globals().copy() if not key.startswith('_')
@@ -21,6 +22,15 @@ def startup():
     except FileNotFoundError:
         pass
     print('Current directory:', os.getcwd())
+
+    # Create some IPython aliases.  See
+    # http://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-alias_magic # noqa
+    from IPython import get_ipython
+    magic = get_ipython().magic
+    # Custom %timeit for more complex functions
+    magic('%alias_magic -p "-n 750 -r 15" ctime timeit')
+    # A TimeitResult object with output suppressed i.e. res = %timeobj f()
+    magic('%alias_magic -p "-oq -n 750 -r 15" timeobj timeit')
 
     # Figsize is specified in `matplotlibrc` file as (8, 5) but
     #     reverts back to (6, 4) in Jupyter QtConsole (but not IPython),
@@ -67,7 +77,7 @@ def startup():
         threshold=625,
         edgeitems=10,
         )
-        
+
 if __name__ == '__main__':
     startup()
     del startup, __doc__
