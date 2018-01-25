@@ -9,6 +9,5 @@ PS1="\e[0;32m \W$ \e[m"
 
 alias lah="ls -lah"
 alias ldir="ls -F -G -l %l | grep /$"
-alias cdnyc="cd /Users/brad/Scripts/python/metis/metisgh/nyc18_ds14/"
 alias resize="printf '\e[8;40;80t'"
 alias small="printf '\e[8;20;70t'"
