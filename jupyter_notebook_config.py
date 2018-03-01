@@ -4,4 +4,4 @@
 
 
 ## The directory to use for notebooks and kernels.
-c.NotebookApp.notebook_dir = '~/Scripts/python'
+c.NotebookApp.notebook_dir = '/Users/brad/Scripts/python'
