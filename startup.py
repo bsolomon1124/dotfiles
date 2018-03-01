@@ -3,7 +3,6 @@
 import os
 import sys
 
-# Bring these into the namespace for convenience' sake
 import numpy as np
 import pandas as pd
 
