@@ -3,9 +3,10 @@ export PATH="/Library/PostgreSQL/10/bin:$PATH"
 
 export GOPATH="$HOME/Scripts/go"
 
+# All Apache-Spark-related
 export JAVA_HOME="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home"
 export SPARK_HOME="/usr/local/Cellar/apache-spark/2.0.1/libexec"
-
+export PYSPARK_PYTHON="/Users/brad/anaconda3/bin/python3"
 export PYTHONPATH="/Users/brad/anaconda3/lib/python3.6"
 export PYTHONPATH="/usr/local/Cellar/apache-spark/2.0.1/libexec/python/:$PYTHONPATH"
 
@@ -18,7 +19,6 @@ alias small="printf '\e[8;20;70t'; clear"
 alias cdpy="cd /Users/brad/Scripts/python/"
 alias cdsite="cd /Users/brad/anaconda3/lib/python3.6/site-packages/"
 alias cdnyc="cd /Users/brad/Scripts/python/metis/metisgh/nyc18_ds14/"
-
 
 # Change to a directory, and list its contents
 cdls() {
