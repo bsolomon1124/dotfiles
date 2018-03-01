@@ -1,4 +1,6 @@
 ```python
+from bs4 import BeautifulSoup, SoupStrainer
+
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
