@@ -9,7 +9,7 @@ import IPython
 c = get_config()
 c.TerminalInteractiveShell.prompts_class = IPython.terminal.prompts.ClassicPrompts
 c.TerminalIPythonApp.display_banner = False
-c.InteractiveShell.automagic = False
+c.InteractiveShell.automagic = True
 c.InteractiveShell.history_load_length = 25000
 c.TerminalInteractiveShell.confirm_exit = False
 c.PlainTextFormatter.max_seq_length = 250
