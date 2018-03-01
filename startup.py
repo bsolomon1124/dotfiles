@@ -1,44 +1,31 @@
-"""IPython startup file.  Place in .ipython/profile_default/startup/"""
+"""IPython startup file.  Place in ~/.ipython/profile_default/startup/"""
 
 import os
+import sys
 
-import matplotlib as mpl  # NOQA
-import matplotlib.pyplot as plt  # NOQA
+# Bring these into the namespace for convenience' sake
 import numpy as np
 import pandas as pd
-import scipy.stats as scs  # NOQA
+
+from IPython import get_ipython
+
 
 
 def startup():
 
-    # Just a convenience msg on startup: "Namespace: os, plt, np, pd, scs"
-    excl = ('In', 'Out', 'get_ipython', 'exit', 'quit', 'excl', 'startup')
-    imports = [key for key in globals().copy() if not key.startswith('_')
-               and key not in excl]
-    print('Namespace:', ', '.join(imports))
-
     try:
-        os.chdir(os.path.expanduser('~') + '/Scripts/python')
+        os.chdir('/Users/brad/Scripts/python/')
     except FileNotFoundError:
-        pass
-    print('Current directory:', os.getcwd())
+        print('Defaulting to %s' % os.getcwd())
 
-    # Create some IPython aliases.  See
-    # http://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-alias_magic # noqa
-    from IPython import get_ipython
+    # Create some IPython aliases.  See http://bit.ly/2HUcUe7
     magic = get_ipython().magic
-    # Custom %timeit for more complex functions
+    sys.stdout = open(os.devnull, 'w')
     magic('%alias_magic -p "-n 750 -r 15" ctime timeit')
-    # A TimeitResult object with output suppressed i.e. res = %timeobj f()
     magic('%alias_magic -p "-oq -n 750 -r 15" timeobj timeit')
+    sys.stdout = sys.__stdout__
 
-    # Figsize is specified in `matplotlibrc` file as (8, 5) but
-    #     reverts back to (6, 4) in Jupyter QtConsole (but not IPython),
-    #     presumably because of backend.  Set manually here.
-    mpl.rcParams['figure.figsize'] = [8.0, 5.0]
-
-    # pandas options -------------------------------------------------------
-    # For full list and defaults:
+    # pandas options & settings - for full list and defaults:
     # https://pandas.pydata.org/pandas-docs/stable/options.html#available-options
     # Reference by full path here to avoid regex conflict with options
     #     added in the future.
@@ -63,7 +50,7 @@ def startup():
         for op, value in option.items():
             pd.set_option('{0}.{1}'.format(category, op), value)
 
-    # NumPy print options --------------------------------------------------
+    # NumPy print options
     # `suppress`:
     # - False: x**2 - (x + eps)**2 --> array([ -4.930e-32,  -4.440e-16, ...
     # - True: x**2 - (x + eps)**2 --> array([-0., -0.,  0.,  0.])
@@ -78,6 +65,7 @@ def startup():
         edgeitems=10,
         )
 
+
 if __name__ == '__main__':
     startup()
-    del startup, __doc__
+    del startup, __doc__, get_ipython
