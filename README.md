@@ -1,2 +1,6 @@
 # config
-Miscellaneous configuration & startup files for IPython, Jupyter Qt, & Python libraries.
+Miscellaneous configuration & startup files for:
+
+- IPython/Jupyter
+- Sublime settings
+- Matplotlib
