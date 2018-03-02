@@ -5,10 +5,15 @@ export GOPATH="$HOME/Scripts/go"
 
 # All Apache-Spark-related
 export JAVA_HOME="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home"
-export SPARK_HOME="/usr/local/Cellar/apache-spark/2.0.1/libexec"
+export SPARK_HOME="/usr/local/Cellar/apache-spark/2.2.1/libexec"
 export PYSPARK_PYTHON="/Users/brad/anaconda3/bin/python3"
 export PYTHONPATH="/Users/brad/anaconda3/lib/python3.6"
-export PYTHONPATH="/usr/local/Cellar/apache-spark/2.0.1/libexec/python/:$PYTHONPATH"
+export PYTHONPATH="$SPARK_HOME/python/:$PYTHONPATH"
+export SCALA_HOME="/usr/local/bin/scala"
+
+export HADOOP_HOME="/usr/local/Cellar/hadoop/3.0.0/libexec"
+export HADOOP_CONF_DIR="$HADOOP_HOME/etc/hadoop"
+
 
 # shorten bash prompt
 PS1="\e[0;32m \W$ \e[m"
