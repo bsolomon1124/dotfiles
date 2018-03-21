@@ -1,17 +1,30 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+#
+# This is a catch-all .gitignore for repositories that
+# primarily use Python.
+# Forked from:
+# https://github.com/github/gitignore/blob/master/Python.gitignore
+# Last update: 2018-03-21
+#
+
+# *Add additional custom patterns here*
+# -------------------------------------
+
+# -------------------------------------
 
 *.doc
 *.docx
 *.zip
 
-# C extensions
-*.so
-
 # Enclosing folder metadata
 .DS_Store
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
 
 # Distribution / packaging
 .Python
@@ -52,6 +65,7 @@ nosetests.xml
 coverage.xml
 *.cover
 .hypothesis/
+.pytest_cache/
 
 # Translations
 *.mo
@@ -59,9 +73,8 @@ coverage.xml
 
 # Django stuff:
 *.log
-.static_storage/
-.media/
 local_settings.py
+db.sqlite3
 
 # Flask stuff:
 instance/
