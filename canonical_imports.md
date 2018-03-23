@@ -1,3 +1,5 @@
+Commonly used "import as" aliases from Python's scientific stack.
+
 ```python
 from bs4 import BeautifulSoup, SoupStrainer
 
