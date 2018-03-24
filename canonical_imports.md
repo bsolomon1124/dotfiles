@@ -10,6 +10,7 @@ import numpy.ma as ma
 import pandas as pd
 import pandas_datareader as pdr
 
+import scipy.optimize as sco
 import scipy.sparse as sp
 import scipy.stats as scs
 import seaborn as sns
