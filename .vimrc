@@ -1,6 +1,5 @@
-" .vimrc, Vim coniguration file
-" Brad Solomon <bsolomon@protonmail.com>
-" Last modified: 2018-07-09
+" .vimrc, Vim configuration file
+" Last modified: 2018-09-27
 
 " If no file type, default to "python"
 autocmd BufEnter * if &filetype == "" | setlocal ft=python | endif
@@ -14,7 +13,10 @@ autocmd BufEnter * if &filetype == "" | setlocal ft=python | endif
 :set number
 :set ruler
 :set shiftwidth=4
-:set textwidth=79
+:set smarttab
+:set softtabstop=0
+:set expandtab
+:set tabstop=8
 
 if &compatible
     set nocompatible
