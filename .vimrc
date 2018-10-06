@@ -13,20 +13,25 @@ Plugin 'VundleVim/Vundle.vim'
 
 " """"""""""""""""""""""""""""""""""""""""""" Specify plugins here
 
-" General
-" Plugin 'vim-syntastic/syntastic'          " syntax checking
-" Plugin 'tmhedberg/SimplyFold'
-" Plugin 'kien/ctrlp.vim'                   " fuzzy finder
-" Git-related
-" Plugin 'tpope/vim-fugitive'
+" """""" General
 
-" Language-specific plugins
-" Plugin 'nvie/vim-flake8'                  " Python flake-8
+" Plugin 'vim-syntastic/syntastic'          " syntax checking; long load times
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'kien/ctrlp.vim'                   " fuzzy finder
+
+" """""" Git-related
+
+Plugin 'tpope/vim-fugitive'
+
+" """""" Language-specific plugins
+
+Plugin 'nvie/vim-flake8'                  " Python flake-8
 " Plugin 'vim-scripts/indentpython.vim'     " DEPRECATED
 " Plugin 'fatih/vim-go'                     " Go development
 " Plugin 'Vimjas/vim-python-pep8-indent'
 
-" Color schemes; not set until "colorscheme" specified
+" """""" Color schemes; not set until "colorscheme" specified
+
 Plugin 'morhetz/gruvbox'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'jnurmine/Zenburn'                 " low-contrast color scheme
@@ -91,6 +96,35 @@ vnoremap <silent> <C-a> ^
 vnoremap <silent> <C-e> $
 
 nnoremap <space> za                     " Enable folding with spacebar
-let g:SimpylFold_docstring_preview=1    " See docstrings for folded code
 
 filetype indent on                      " load filetype-specific indent files
+
+" remove all trailing whitespace on save
+" to only affect certain files exts: autocmd BufWritePre *.py :%s/\s\+$//e
+autocmd BufWritePre * :%s/\s\+$//e
+
+" """"""""""""""""""""""""""""""""""""""""""" Plugin options
+
+let g:SimpylFold_docstring_preview=1    " See docstrings for folded code
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" run the Flake8 check every time you write a Python file
+autocmd BufWritePost *.py call Flake8()
+
+let g:flake8_show_in_gutter = 1
+let g:flake8_show_in_file = 1
+let g:flake8_show_quickfix = 1
+let g:flake8_quickfix_height = 10
+
+let g:flake8_complexity_marker = ''  " disable McCabe complexity warnings
+
+" use colors defined in the colorscheme
+highlight link Flake8_Error      Error
+highlight link Flake8_Warning    WarningMsg
+highlight link Flake8_Complexity WarningMsg
+highlight link Flake8_Naming     WarningMsg
+highlight link Flake8_PyFlake    WarningMsg
