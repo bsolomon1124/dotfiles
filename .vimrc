@@ -27,7 +27,7 @@ Plugin 'tpope/vim-fugitive'
 
 Plugin 'nvie/vim-flake8'                  " Python flake-8
 " Plugin 'vim-scripts/indentpython.vim'     " DEPRECATED
-" Plugin 'fatih/vim-go'                     " Go development
+    Plugin 'fatih/vim-go'                     " Go development
 " Plugin 'Vimjas/vim-python-pep8-indent'
 
 " """""" Color schemes; not set until "colorscheme" specified
@@ -46,7 +46,12 @@ Plugin 'vim-airline/vim-airline'
 " """"""""""""""""""""""""""""""""""""""""""" End plugin specification
 
 call vundle#end()            " required by Vundle
-filetype plugin indent on    " required by VUndle
+
+" required by Vundle.  This:
+" - enables filetype detection
+" - enables filetype plugins
+" - uses indent files
+filetype plugin indent on
 
 syntax on
 
@@ -55,8 +60,10 @@ syntax on
 " Note that these won't do much if you have a generic no-extension blank file open
 :colo gruvbox
 
+:set encoding=utf-8
 :set background=dark        " does not change background color, just tells Vim what background color looks like
 :set autowrite
+:set eol                    " ensure EOL written for last line at write
 :set hlsearch               " search highlighting
 :set incsearch              " incremental search
 :set ignorecase
@@ -64,11 +71,13 @@ syntax on
 :set antialias
 :set number
 :set ruler
-:set showcmd                " shows last command entered at bottom right
+:set showcmd                " shows last command entered at bottom right, or current incomplete cmd
 :set cursorline             " highlight current line
 :set showmatch              " highlight matching [{()}]
+:set history=10000          " command-line history
 
-:set backspace=2            " Fix Delete (backspace) on Mac OS X
+
+:set backspace=indent,eol,start   " Allow backspacing over everything in insert mode
 :set fileformat=unix
 :set nowrap
 :set encoding=utf-8
@@ -96,8 +105,6 @@ vnoremap <silent> <C-a> ^
 vnoremap <silent> <C-e> $
 
 nnoremap <space> za                     " Enable folding with spacebar
-
-filetype indent on                      " load filetype-specific indent files
 
 " remove all trailing whitespace on save
 " to only affect certain files exts: autocmd BufWritePre *.py :%s/\s\+$//e
