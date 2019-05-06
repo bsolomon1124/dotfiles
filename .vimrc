@@ -30,7 +30,7 @@ Plugin 'tpope/vim-fugitive'
 
 Plugin 'nvie/vim-flake8'                  " Python flake-8
 " Plugin 'vim-scripts/indentpython.vim'     " DEPRECATED
-    Plugin 'fatih/vim-go'                     " Go development
+Plugin 'fatih/vim-go'                     " Go development
 " Plugin 'Vimjas/vim-python-pep8-indent'
 
 " """""" Color schemes; not set until "colorscheme" specified
@@ -56,6 +56,7 @@ call vundle#end()            " required by Vundle
 " - uses indent files
 filetype plugin indent on
 
+set t_Co=256
 syntax on
 
 " `:colo[rscheme] {name} searches 'runtimepath' for the file "colors/{name}.vim"
