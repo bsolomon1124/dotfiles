@@ -4,6 +4,9 @@
 set nocompatible            " required by Vundle
 filetype off                " required by Vundle
 
+" If no file type, default to "python"
+autocmd BufEnter * if &filetype == "" | setlocal ft=python | endif
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
