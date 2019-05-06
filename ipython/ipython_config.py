@@ -15,4 +15,5 @@ c.TerminalInteractiveShell.confirm_exit = False
 c.PlainTextFormatter.max_seq_length = 250
 c.InteractiveShell.xmode = 'Plain'
 c.InteractiveShell.banner1 = ''
-
+c.TerminalInteractiveShell.separate_in = ''
+c.TerminalInteractiveShell.separate_out = ''
