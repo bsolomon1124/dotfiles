@@ -10,6 +10,18 @@ To use, first run:
     ipython profile create
 
 in your terminal, then overwrite the created file with this one.
+
+Examples:
+
+$ ipython
+IPython 7.3.0 | CPython 3.7.2 | Linux 4.15.0-1035-aws | 2019-05-06 16:07:15
+>>> def f(x):
+...     return x ** 2
+
+$ ipython
+IPython 7.0.1 | CPython 3.7.3 | Darwin 17.7.0 | 2019-05-06 12:07:05
+>>> %timeit pass
+9.44 ns ± 0.0394 ns per loop (mean ± std. dev. of 7 runs, 100000000 loops each)
 """
 
 import datetime
