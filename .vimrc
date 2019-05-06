@@ -1,6 +1,5 @@
 " .vimrc, Vim configuration file
 
-
 set nocompatible            " required by Vundle
 filetype off                " required by Vundle
 
