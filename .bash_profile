@@ -51,6 +51,7 @@ if [[ -x $(which python3) ]]; then
     alias pyq="python3 -q"
 fi
 alias pygrep='grep --include \*.py'
+alias ipy='ipython'
 
 # Other aliases
 alias myip="curl ifconfig.me/ip && echo"
