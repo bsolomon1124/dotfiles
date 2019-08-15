@@ -20,13 +20,13 @@ export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
-# Prompts:
-# - Offer alternative "short" and "long" prompts
-# - Alter PS1 short prompt: just `$`
-PSMED="\[\e[0;32m\] \W$ \[\e[m\]"
-PSSHORT="\[\e[0;32m\]$ \[\e[m\]"
-PSLONG="\[\e[0;32m\][\t \u   \w]$ \[\e[m\]"
-export PS1=$PSSHORT
+STARTCOLOR="\[\e[0;32m\]"  # Escape color literals or prompt will overwrite itself
+ENDCOLOR="\[\e[0m\]"
+PS1="$STARTCOLOR [\W/] $ $ENDCOLOR"
+PSSHORT="$STARTCOLOR$ $ENDCOLOR"  # Just $
+PSLONG="$STARTCOLOR[\t \u   \w]$ $ENDCOLOR"
+PSDEFAULT="\h:\W \u\$"
+export $PS1
 
 # Git command completion, if file is there
 # See Chacon & Straub - p. 456
@@ -50,4 +50,7 @@ fi
 if [[ -x $(which python3) ]]; then
     alias pyq="python3 -q"
 fi
+alias pygrep='grep --include \*.py'
 
+# Other aliases
+alias myip="curl ifconfig.me/ip && echo"
