@@ -1,0 +1,18 @@
+# System-wide Git configuration
+# On Linux, put at /etc/gitconfig
+[color]
+    ui=true
+[alias]
+    l     = log
+    sg    = log --oneline --graph --date=short
+    sgs   = sgs -n 15
+    last  = log -n 1
+    sb    = status -sb
+    a     = add
+    ci    = commit
+    d     = diff
+    s     = status
+    st    = status
+    pom   = push origin master
+[core]
+    editor=vim
