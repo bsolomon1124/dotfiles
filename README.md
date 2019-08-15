@@ -1,6 +1,3 @@
 # config
-Miscellaneous configuration & startup files for:
 
-- IPython/Jupyter
-- Sublime settings
-- Matplotlib
+Miscellaneous configuration & startup files.  Python-centric.
