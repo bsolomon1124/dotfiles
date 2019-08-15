@@ -1,0 +1,3 @@
+/* sqlite3 configuration file */
+.mode column
+.headers on

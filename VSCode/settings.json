@@ -1,0 +1,9 @@
+{
+    "files.defaultLanguage": "python",
+    "editor.renderWhitespace": "boundary",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "files.trimTrailingWhitespace": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true
+}
