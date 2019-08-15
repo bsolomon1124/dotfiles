@@ -60,7 +60,9 @@ def get_version_info() -> str:
         sys_rel = " ".join((platform.system(), platform.release()))
     except IOError:
         sys_rel = "[unknown system]"
-    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    now = datetime.datetime.now(
+        datetime.timezone.utc
+    ).strftime("%Y-%m-%d %H:%M:%S %Z")
     return " | ".join((ipython, implstr, sys_rel, now)) + os.linesep
 
 
