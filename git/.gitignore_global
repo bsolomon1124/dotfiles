@@ -1,0 +1,8 @@
+.DS_Store
+.svn
+.hg
+*.swp
+*~
+*.zip
+*.gz
+*.bz2
