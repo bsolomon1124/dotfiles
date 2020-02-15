@@ -13,12 +13,12 @@ function npgrep()
 
 function headers()
 {
-if [[ -x "$(command -v http)" ]]; then
-    http --headers "$@"
-else
-    curl -sv "$@" 2>&1 >/dev/null |
-        grep -v "^\*" |
-        grep -v "^}" |
-        cut -c3-
-fi
+    if [[ -x "$(command -v http)" ]]; then
+        http --headers "$@"
+    else
+        curl -sv "$@" 2>&1 >/dev/null |
+            grep -v "^\*" |
+            grep -v "^}" |
+            cut -c3-
+    fi
 }
