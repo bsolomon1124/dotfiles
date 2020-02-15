@@ -8,7 +8,7 @@ function google()
 
 function npgrep()
 {
-    ps aux | ripgrep "$1"
+    ps aux | rg -i "$1"
 }
 
 function headers()
