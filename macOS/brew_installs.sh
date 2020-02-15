@@ -32,6 +32,7 @@ brew install --verbose jq
 brew install --verbose nmap
 brew install --verbose node
 brew install --verbose postgresql
+brew install --verbose pyenv
 brew install --verbose ripgrep
 brew install --verbose sqlite
 brew install --verbose tree

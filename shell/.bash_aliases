@@ -7,7 +7,7 @@
 # Set an alias only if it does not already exist.
 function safe_alias()
 {
-    name="$1"
+    readonly local name="$1"
     shift
     ( \
         alias "$name" > /dev/null 2>&1 \
