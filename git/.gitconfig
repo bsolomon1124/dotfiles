@@ -1,0 +1,32 @@
+# System-wide Git configuration
+# To find where this file sits, use
+# `git config --global --edit`; it is probably at
+# ~/.gitconfig
+# On Linux, can also put at /etc/gitconfig
+[user]
+    name = Brad Solomon
+    email = bsolomon@protonmail.com
+[color]
+    diff = auto
+    stats = auto
+    branch = auto
+    ui = true
+[color "diff"]
+    old = red strike
+    new = green italic
+[alias]
+    l     = log
+    sg    = log --oneline --graph --date=short
+    logrec = log --format='%h %Cgreen %ad %Creset %s' --no-merges --date='format:%b %d: %H:%M %z'
+    sgs   = sg -n 15
+    a     = add
+    ci    = commit
+    d     = diff
+    s     = status
+    st    = status
+    sb    = status -sb
+    pom   = push origin master
+    sincetag = log "$(git describe --tags --abbrev=0)"..HEAD
+[core]
+    editor = vim
+    excludesfile = ~/.gitignore_global
