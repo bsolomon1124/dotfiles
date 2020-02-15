@@ -1,3 +1,3 @@
 # config
 
-Miscellaneous configuration & startup files.  Python-centric.
+Miscellaneous configuration & startup files/dotfiles.
