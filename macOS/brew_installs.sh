@@ -34,6 +34,7 @@ brew install --verbose node
 brew install --verbose postgresql
 brew install --verbose pyenv
 brew install --verbose ripgrep
+brew install --verbose shellcheck
 brew install --verbose sqlite
 brew install --verbose tree
 brew install --verbose unrar
