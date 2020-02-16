@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+#
+# Formal environ (see `man environ`)
+#
+
+# The timezone to use when displaying dates.  The normal format is a pathname relative to '/usr/share/zoneinfo'
+export TZ='America/New_York'
+
+# LC_ALL overrides the values of LC_COLLATE, LC_CTYPE, LC_MESSAGES, LC_MONETARY, LC_NUMERIC, LC_TIME and LANG.
+export LANG='en_US.UTF-8'
+export LANG_ALL='en_US.UTF-8'
+
+export EDITOR='vim'
+
+# A brief 'how is my PATH obtained on macOS?' primer:
+#
+# - Default PATH values are obtained from /etc/paths
+#   On macOS 10.15.2, this looks like:
+#       /usr/local/bin
+#       /usr/bin
+#       /bin
+#       /usr/sbin
+#       /sbin
+# - The internal `path_helper` utility then reads the contents of the files in /etc/paths.d
+#   and appends their contents to PATH
+if [[ "$(uname)" -eq "Darwin" ]]; then
+    export PATH="/usr/local/sbin:${HOME}/bin:${PATH}"
+fi
+
+# Pyenv: https://github.com/pyenv/pyenv#basic-github-checkout
+if [[ -d "$HOME/.pyenv" ]]; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$HOME/.pyenv/bin:$PATH"
+fi
+if [[ -x "$(command -v pyenv)" ]]; then
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
+
+# LESS man page colors (makes Man pages more readable)
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
+
+export BAT_THEME='Monokai Extended Light'
