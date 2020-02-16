@@ -5,6 +5,8 @@
 #
 
 # Set an alias only if it does not already exist.
+# N.B.: alias exit Status: alias returns true unless a NAME is supplied for which no alias has been set
+    defined.
 function safe_alias()
 {
     local name="$1"
@@ -91,7 +93,6 @@ safe_alias bz2 'bzip2'
 # Usage: targz name-of-archive.tar.gz /path/to/directory-or-file [/path/to/directory-or-file...]
 safe_alias tgz 'tar --create --gzip --verbose --totals --file'
 
-
 safe_alias tarls 'tar --list --verbose --file'
 
 # Change terminal window size
@@ -99,10 +100,13 @@ safe_alias resize "printf '\e[8;40;80t'; clear"
 safe_alias small "printf '\e[8;20;70t'; clear"
 safe_alias wide "printf '\e[8;20;150t'; clear"
 
-safe_alias clangw "clang -Wall -Werror -Wextra"
+if [[ -x "$(command -v clang)" ]]; then
+    safe_alias clangw "clang -Wall -Werror -Wextra"
+fi
 safe_alias hist "history"
 
-safe_alias cx "chmod +x"
+safe_alias cx "chmod a+x"
+safe_alias ca "chmod a+rwx"
 
 # Personally, I think this is much less work than using `jq`
 safe_alias json 'python -m json.tool --sort-keys'
