@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+#
+# Upgrade pyenv Python versions to latest PATCH version for each MINOR
+# Uninstall stale versions
+#
+
+# Uninstall versions that we have installed that are outdated MINOR versions
+STALE_VERSIONS=($(pyenv install --list | grep --extended-regexp '^\s+\d' | grep -vE 'dev|rc' | grep -vE '\s+2\.[1-6]' | grep -vE '\s+3\.[0-4]' | "$(dirname $(stat -f $0))"/_pyenv_stale.py))
+for i in "${STALE_VERSIONS[@]}"; do
+    (pyenv versions | grep -q --extended-regexp "${i}(?: |$)") && echo -e "\e[34mUNINSTALLING Python "$i"\e[39m"
+    pyenv uninstall -f "$i"
+done
+
+# Find the latest PATCH version for each MINOR version and install it
+LATEST_VERSIONS=($(pyenv install --list | grep --extended-regexp '^\s+\d' | grep -vE 'dev|rc' | grep -vE '\s+2\.[1-6]' | grep -vE '\s+3\.[0-4]' | "$(dirname $(stat -f $0))"/_pyenv_latest.py))
+for i in "${LATEST_VERSIONS[@]}"; do
+    (pyenv versions | grep -q --extended-regexp "${i}(?: |$)") || echo -e "\e[36mINSTALLING Python "$i"\e[39m"
+    pyenv install --skip-existing "$i"
+done

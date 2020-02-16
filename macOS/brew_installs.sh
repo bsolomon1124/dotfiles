@@ -20,11 +20,14 @@ brew install --verbose bat
 brew install --verbose cask
 brew install --verbose cloc
 brew install --verbose clang-format
+brew install --verbose colordiff
+brew install --verbose coreutils
 brew install --verbose cppcheck
 brew install --verbose dos2unix
 brew install --verbose fd
 brew install --verbose gcc
 brew install --verbose geoip
+brew install --verbose golang
 brew install --verbose hadolint
 brew install --verbose htop
 brew install --verbose httpie
@@ -33,7 +36,9 @@ brew install --verbose nmap
 brew install --verbose node
 brew install --verbose postgresql
 brew install --verbose pyenv
+brew install --verbose R
 brew install --verbose ripgrep
+brew install --verbose scala
 brew install --verbose shellcheck
 brew install --verbose sqlite
 brew install --verbose tree

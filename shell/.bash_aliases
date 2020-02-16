@@ -6,7 +6,6 @@
 
 # Set an alias only if it does not already exist.
 # N.B.: alias exit Status: alias returns true unless a NAME is supplied for which no alias has been set
-    defined.
 function safe_alias()
 {
     local name="$1"
