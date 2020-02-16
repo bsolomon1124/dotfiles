@@ -77,20 +77,6 @@ fi
 
 safe_alias bz2 'bzip2'
 
-# Because I can't for the life of me remember the right tar flags
-# (See also COMPABILITY for the 'bundled form' in `man tar`)
-# Some option quick reference:
-#
-#     -c/--create: Create a new archive containing the specified items
-#     -f/--file: Read the archive from or write the archive to the specified file
-#     -t/--list: List archive contents to stdout
-#     -x/--extract: Extract to disk from the archive
-#     -v/--verbose: List each file name as it is read from or written to the archive
-#     -z/--gzip: Compress the resulting archive with gzip
-# TODO: maybe use --auto-compress?
-
-# Usage: targz name-of-archive.tar.gz /path/to/directory-or-file [/path/to/directory-or-file...]
-safe_alias tgz 'tar --create --gzip --verbose --totals --file'
 
 safe_alias tarls 'tar --list --verbose --file'
 
