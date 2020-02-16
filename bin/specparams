@@ -4,7 +4,7 @@
 # - Values brevity over completeness
 # - Excludes a few params that you will probably never use
 
-function echott()
+function echot()
 {
     echo -n '    '
     echo "$1"
