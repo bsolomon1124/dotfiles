@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [[ -x "$(command -v rg))" ]]; then
+    ps aux | rg -i "$*"
+else
+    ps aux | grep -i "$*"
+fi

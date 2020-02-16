@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# Plain-text man output, without backspaces and underscores
+# A tip from `man man`
+man "$*" | col -b

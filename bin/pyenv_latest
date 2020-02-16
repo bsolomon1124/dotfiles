@@ -5,16 +5,44 @@
 # Uninstall stale versions
 #
 
-# Uninstall versions that we have installed that are outdated MINOR versions
-STALE_VERSIONS=($(pyenv install --list | grep --extended-regexp '^\s+\d' | grep -vE 'dev|rc' | grep -vE '\s+2\.[1-6]' | grep -vE '\s+3\.[0-4]' | "$(dirname $(stat -f $0))"/_pyenv_stale.py))
+if [[ ! -x "$(command -v pyenv)" ]]; then
+    echo "pyenv not found; exiting" >&2
+    exit 1
+fi
+
+echo -e "\e[34mUpgrading pyenv and availabel Python versions\e[39m"
+pushd $(pyenv root)
+git pull
+popd
+
+echo "Uninstalling outdated MINOR versions..."
+STALE_VERSIONS=($(\
+    pyenv install --list \
+    | grep --extended-regexp '^\s+\d' \
+    | grep -vE 'dev|rc' \
+    | grep -vE '\s+2\.[1-6]' \
+    | grep -vE '\s+3\.[0-4]' \
+    | "$(dirname $(stat -f $0))"/_pyenv_stale.py\
+))
 for i in "${STALE_VERSIONS[@]}"; do
-    (pyenv versions | grep -q --extended-regexp "${i}(?: |$)") && echo -e "\e[34mUNINSTALLING Python "$i"\e[39m"
+    (pyenv versions | grep -q --extended-regexp "${i}(?: |$)") && echo -e "\e[34mUNINSTALLING Python ${i}\e[39m"
     pyenv uninstall -f "$i"
 done
 
-# Find the latest PATCH version for each MINOR version and install it
-LATEST_VERSIONS=($(pyenv install --list | grep --extended-regexp '^\s+\d' | grep -vE 'dev|rc' | grep -vE '\s+2\.[1-6]' | grep -vE '\s+3\.[0-4]' | "$(dirname $(stat -f $0))"/_pyenv_latest.py))
+echo "Installing latest PATCH version for each MINOR version..."
+LATEST_VERSIONS=($(\
+    pyenv install --list \
+    | grep --extended-regexp '^\s+\d' \
+    | grep -vE 'dev|rc' \
+    | grep -vE '\s+2\.[1-6]' \
+    | grep -vE '\s+3\.[0-4]' \
+    | "$(dirname $(stat -f $0))"/_pyenv_latest.py\
+))
 for i in "${LATEST_VERSIONS[@]}"; do
-    (pyenv versions | grep -q --extended-regexp "${i}(?: |$)") || echo -e "\e[36mINSTALLING Python "$i"\e[39m"
+    if (pyenv versions | grep -q --extended-regexp "${i}(?: |$)"); then
+        echo -e "\e[36mSkipping install of Python ${i} (already installed)\e[39m"
+    else
+        echo -e "\e[36mINSTALLING Python ${i}\e[39m"
+    fi
     pyenv install --skip-existing "$i"
 done

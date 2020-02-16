@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# Get the octal representation from file
+# mode as a string.
+# filemode rwx --> 7
+# We could use an associate array assuming Bash 4+
+case $1 in
+    "---")      echo 0;;
+    "--x")      echo 1;;
+    "-w-")      echo 2;;
+    "-wx")      echo 3;;
+    "r--")      echo 4;;
+    "r-x")      echo 5;;
+    "rw-")      echo 6;;
+    "rwx")      echo 7;;
+    *)          echo "Invalid entry" >&2
+                return 1
+                ;;
+esac

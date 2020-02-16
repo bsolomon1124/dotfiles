@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# This list:
+# - Values brevity over completeness
+# - Excludes a few params that you will probably never use
+
+function echott()
+{
+    echo -n '    '
+    echo "$1"
+}
+
+echo 'Bash special parameters: https://www.gnu.org/software/bash/manual/bash.html'
+echo
+echot '$*    Pos. parameters; "$*" expands to "$1 $2 …"'
+echot '$@    Pos. parameters; "$@" expands to "$1" "$2" …'
+echot '$#    Number of positional parameters (excludes script name)'
+echot '$?    Exit status of the most recently executed foreground pipeline'
+echot '$-    Current option flags, e.g. via `set` or `sh -i`'
+echot '$$    PID of shell or invoking (parent) shell'
+echot '$!    PID of most recent background job'
+echot '$0    Name of the shell or shell script'

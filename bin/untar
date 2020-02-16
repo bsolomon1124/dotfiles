@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Usage: untar archive.tar.gz [/dir/to/extract/]
+tarball="$1"
+if [[ "$#" -eq 2 ]]; then
+    dest="$2"
+    mkdir -p "$dest"
+    tar --extract --gzip --verbose --file "$tarball" -C "$dest"
+else
+    tar --extract --gzip --verbose --file "$1"
+fi
