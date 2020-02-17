@@ -16,6 +16,8 @@
 :set background=dark              " does not change background color, just tells Vim what background color looks like
 :set backspace=indent,eol,start   " Allow backspacing over everything in insert mode
 :set clipboard=unnamed            " give access to system clipboard
+:set colorcolumn=120              " we use a column at 120 because that is the width in places like GitHub UI
+hi ColorColumn ctermbg=grey
 :set encoding=utf-8               " sets the character encoding used inside Vim"
 :set eol                          " ensure EOL written for last line at write
 :set expandtab                    " use the appropriate number of spaces to insert a <Tab>

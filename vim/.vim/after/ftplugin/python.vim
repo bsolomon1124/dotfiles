@@ -1,5 +1,5 @@
 " Some of this is from http://svn.python.org/projects/python/trunk/Misc/Vim/vimrc
-setlocal colorcolumn=72,80
+setlocal colorcolumn=120
 hi ColorColumn ctermbg=grey
 setlocal tabstop=4
 setlocal shiftwidth=4
