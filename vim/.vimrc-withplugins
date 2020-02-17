@@ -64,10 +64,12 @@ call vundle#end()            " required by Vundle
 
 " Keep this section sorted
 :set autoindent                   " copy indent from current line when starting a new line
-:set autowrite                    " write the contents of the file, if it has been modified, on each :next, :rewind, etc
+:set autowrite                    " automatically save before commands like :next and :make
 :set background=dark              " does not change background color, just tells Vim what background color looks like
 :set backspace=indent,eol,start   " Allow backspacing over everything in insert mode
 :set clipboard=unnamed            " give access to system clipboard
+:set colorcolumn=120              " we use a column at 120 because that is the width in places like GitHub UI
+hi ColorColumn ctermbg=grey
 :set encoding=utf-8               " sets the character encoding used inside Vim"
 :set eol                          " ensure EOL written for last line at write
 :set expandtab                    " use the appropriate number of spaces to insert a <Tab>
@@ -80,12 +82,13 @@ call vundle#end()            " required by Vundle
 :set hlsearch                     " search highlighting
 :set ignorecase                   " ignore case when searching
 :set incsearch                    " incremental search
+:set mouse=a                      " enable mouse usage (all modes)
 :set nowrap                       " don't wrap lines
 :set number                       " precede each line with its line number
 :set ruler                        " show the line and column number of the cursor position, separated by a comma
 :set shiftround                   " round indent to multiple of 'shiftwidth'
 :set showcmd                      " shows last command entered at bottom right, or current incomplete cmd
-:set showmatch                    " highlight matching [{()}]
+:set showmatch                    " highlight matching brackets e.g. [{()}]
 :set smartcase                    " no ignore case when a search pattern has uppercase
 :set softtabstop=4                " number of spaces that a <Tab> counts for while performing editing
 :set tabstop=4                    " number of spaces that a <Tab> in the file counts for
@@ -129,3 +132,13 @@ highlight link Flake8_Warning    WarningMsg
 highlight link Flake8_Complexity WarningMsg
 highlight link Flake8_Naming     WarningMsg
 highlight link Flake8_PyFlake    WarningMsg
+
+" Have Vim jump to the last position when reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+" Source a global configuration file if available
+if filereadable("/etc/vim/vimrc.local")
+  source /etc/vim/vimrc.local
+endif
