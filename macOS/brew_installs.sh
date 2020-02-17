@@ -28,6 +28,7 @@ brew install --verbose fd
 brew install --verbose gcc
 brew install --verbose geoip
 brew install --verbose golang
+brew install --verbose greadline
 brew install --verbose hadolint
 brew install --verbose htop
 brew install --verbose httpie
@@ -36,6 +37,8 @@ brew install --verbose nmap
 brew install --verbose node
 brew install --verbose postgresql
 brew install --verbose pyenv
+brew install --verbose readline
+brew install --verbose redis
 brew install --verbose R
 brew install --verbose ripgrep
 brew install --verbose scala
@@ -46,3 +49,4 @@ brew install --verbose unrar
 brew install --verbose vim
 brew install --verbose watch
 brew install --verbose wget
+brew install --verbose xz
