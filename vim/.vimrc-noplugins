@@ -1,0 +1,53 @@
+" .vimrc, Vim configuration file, sans plugins/Vundle
+" This is designed to be a hyper-noncontroversial and minimalist
+" set of settings that can work out of the box.  Consider these to be
+" global defaults; these may be overriden by language-specific settings in
+" ~/.vim/ftplugin/{language}.vim
+
+:set t_Co=256
+:set term=xterm-256color
+
+:filetype plugin on
+:syntax on
+
+" Keep this section sorted
+:set autoindent                   " copy indent from current line when starting a new line
+:set autowrite                    " write the contents of the file, if it has been modified, on each :next, :rewind, etc
+:set background=dark              " does not change background color, just tells Vim what background color looks like
+:set backspace=indent,eol,start   " Allow backspacing over everything in insert mode
+:set clipboard=unnamed            " give access to system clipboard
+:set encoding=utf-8               " sets the character encoding used inside Vim"
+:set eol                          " ensure EOL written for last line at write
+:set expandtab                    " use the appropriate number of spaces to insert a <Tab>
+:set fileformat=unix              " gives the <EOL> of the current buffer; on Unix, it is <NL>
+:set foldenable                   " enable folding
+:set foldmethod=indent            " folding type - fold based on indent level
+:set foldlevel=10                 " close deeply nested folds, most open by default
+                                  " a fold level of 99 would mean all folds always open
+:set history=10000                " command-line history
+:set hlsearch                     " search highlighting
+:set ignorecase                   " ignore case when searching
+:set incsearch                    " incremental search
+:set nowrap                       " don't wrap lines
+:set number                       " precede each line with its line number
+:set ruler                        " show the line and column number of the cursor position, separated by a comma
+:set shiftround                   " round indent to multiple of 'shiftwidth'
+:set showcmd                      " shows last command entered at bottom right, or current incomplete cmd
+:set showmatch                    " highlight matching [{()}]
+:set smartcase                    " no ignore case when a search pattern has uppercase
+:set softtabstop=4                " number of spaces that a <Tab> counts for while performing editing
+:set tabstop=4                    " number of spaces that a <Tab> in the file counts for
+:set textwidth=0                  " maximum width of text that is being inserted [disabled this feature=0]
+
+" Emacs-style start of line / end of line navigation
+nnoremap <silent> <C-a> ^
+nnoremap <silent> <C-e> $
+vnoremap <silent> <C-a> ^
+vnoremap <silent> <C-e> $
+
+" Enable folding with spacebar
+nnoremap <space> za
+
+" remove all trailing whitespace on save
+" to only affect certain files extensions: autocmd BufWritePre *.py :%s/\s\+$//e
+autocmd BufWritePre * :%s/\s\+$//e

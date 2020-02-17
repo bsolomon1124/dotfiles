@@ -1,0 +1,131 @@
+" .vimrc, Vim configuration file;
+" This version (versus '.vimrc-noplugins') is opinionated and includes plugins
+
+:set nocompatible            " required by Vundle
+:filetype off                " required by Vundle
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" """"""""""""""""""""""""""""""""""""""""""" Specify plugins here
+
+" """""" General
+
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'kien/ctrlp.vim'                   " fuzzy finder
+Plugin 'preservim/nerdtree'               " file system explorer
+Plugin 'itchyny/lightline.vim'            " statusline/tabline
+
+" """""" Git-related
+
+Plugin 'tpope/vim-fugitive'
+
+" """""" Language-specific plugins
+
+Plugin 'nvie/vim-flake8'                  " Python flake-8
+Plugin 'fatih/vim-go'                     " Go development
+Plugin 'pangloss/vim-javascript'
+
+" """""" Color schemes; not set until "colorscheme" specified
+
+Plugin 'morhetz/gruvbox'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'jnurmine/Zenburn'                 " low-contrast color scheme
+Plugin 'gmarik/ingretu'
+Plugin 'fxn/vim-monochrome'
+Plugin 'chriskempson/tomorrow-theme'
+Plugin 'sickill/vim-monokai'
+Plugin 'sjl/badwolf'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'vim-airline/vim-airline'
+
+" """"""""""""""""""""""""""""""""""""""""""" End plugin specification
+
+call vundle#end()            " required by Vundle
+
+" required by Vundle.  This:
+" - enables filetype detection
+" - enables filetype plugins
+" - uses indent files
+:filetype plugin indent on
+:syntax on
+
+" `:colo[rscheme] {name} searches 'runtimepath' for the file "colors/{name}.vim"
+" example: `colo gruvbox`
+" Note that these won't do much if you have a generic no-extension blank file open
+:colo gruvbox
+
+:set t_Co=256
+:set term=xterm-256color
+
+" Keep this section sorted
+:set autoindent                   " copy indent from current line when starting a new line
+:set autowrite                    " write the contents of the file, if it has been modified, on each :next, :rewind, etc
+:set background=dark              " does not change background color, just tells Vim what background color looks like
+:set backspace=indent,eol,start   " Allow backspacing over everything in insert mode
+:set clipboard=unnamed            " give access to system clipboard
+:set encoding=utf-8               " sets the character encoding used inside Vim"
+:set eol                          " ensure EOL written for last line at write
+:set expandtab                    " use the appropriate number of spaces to insert a <Tab>
+:set fileformat=unix              " gives the <EOL> of the current buffer; on Unix, it is <NL>
+:set foldenable                   " enable folding
+:set foldmethod=indent            " folding type - fold based on indent level
+:set foldlevel=10                 " close deeply nested folds, most open by default
+                                  " a fold level of 99 would mean all folds always open
+:set history=10000                " command-line history
+:set hlsearch                     " search highlighting
+:set ignorecase                   " ignore case when searching
+:set incsearch                    " incremental search
+:set nowrap                       " don't wrap lines
+:set number                       " precede each line with its line number
+:set ruler                        " show the line and column number of the cursor position, separated by a comma
+:set shiftround                   " round indent to multiple of 'shiftwidth'
+:set showcmd                      " shows last command entered at bottom right, or current incomplete cmd
+:set showmatch                    " highlight matching [{()}]
+:set smartcase                    " no ignore case when a search pattern has uppercase
+:set softtabstop=4                " number of spaces that a <Tab> counts for while performing editing
+:set tabstop=4                    " number of spaces that a <Tab> in the file counts for
+:set textwidth=0                  " maximum width of text that is being inserted [disabled this feature=0]
+
+" Emacs-style start of line / end of line navigation
+nnoremap <silent> <C-a> ^
+nnoremap <silent> <C-e> $
+vnoremap <silent> <C-a> ^
+vnoremap <silent> <C-e> $
+
+" Enable folding with spacebar
+nnoremap <space> za
+
+" remove all trailing whitespace on save
+" to only affect certain files extensions: autocmd BufWritePre *.py :%s/\s\+$//e
+autocmd BufWritePre * :%s/\s\+$//e
+
+" """"""""""""""""""""""""""""""""""""""""""" Plugin options
+
+let g:SimpylFold_docstring_preview=1    " See docstrings for folded code
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" run the Flake8 check every time you write a Python file
+autocmd BufWritePost *.py call Flake8()
+
+let g:flake8_show_in_gutter = 1
+let g:flake8_show_in_file = 1
+let g:flake8_show_quickfix = 1
+let g:flake8_quickfix_height = 10
+
+let g:flake8_complexity_marker = ''  " disable McCabe complexity warnings
+
+" use colors defined in the colorscheme
+highlight link Flake8_Error      Error
+highlight link Flake8_Warning    WarningMsg
+highlight link Flake8_Complexity WarningMsg
+highlight link Flake8_Naming     WarningMsg
+highlight link Flake8_PyFlake    WarningMsg
