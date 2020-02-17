@@ -48,3 +48,17 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
 export BAT_THEME='Monokai Extended Light'
+
+# Prompts (Bash Prompt String 1 (use PS1=$PSLONG/$PSSHORT))
+STARTCOLOR="\[\e[0;32m\]"  # Escape color literals or prompt will overwrite itself
+ENDCOLOR="\[\e[0m\]"
+export PS1="$STARTCOLOR [\W/] $ $ENDCOLOR"
+PSSHORT="$STARTCOLOR$ $ENDCOLOR"  # Just $
+PSLONG="$STARTCOLOR[\t \u   \w]$ $ENDCOLOR"
+PSDEFAULT="\h:\W \u\$"
+
+export GIT_MERGE_AUTOEDIT=no
+
+# Add the bin/ of this repo to PATH
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd | xargs dirname)"
+export PATH="${PATH}:${DIR}/bin"
