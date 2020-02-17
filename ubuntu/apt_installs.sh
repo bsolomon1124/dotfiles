@@ -10,6 +10,8 @@ set -ex
 apt-get update -y
 apt-get autoremove -y
 
+apt-get install -y --no-install-recommends man-db
+
 # Keep this alphabetized for sanity
 apt-get install -y --no-install-recommends build-essential
 apt-get install -y --no-install-recommends bzip2
@@ -29,6 +31,9 @@ apt-get install -y --no-install-recommends unzip
 apt-get install -y --no-install-recommends wget
 
 # A few Python/pyenv deps kept separate (some may be above though)
+# NOTE: tk-dev will prompt for TZ info; set
+#     DEBIAN_FRONTEND=noninteractive ./apt_installs.sh
+# to disable prompt
 apt-get install -y --no-install-recommends libssl-dev
 apt-get install -y --no-install-recommends zlib1g-dev
 apt-get install -y --no-install-recommends libbz2-dev
