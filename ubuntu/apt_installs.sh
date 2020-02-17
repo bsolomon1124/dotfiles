@@ -28,6 +28,7 @@ apt-get install -y --no-install-recommends make
 apt-get install -y --no-install-recommends openssh-client
 apt-get install -y --no-install-recommends tree
 apt-get install -y --no-install-recommends unzip
+apt-get install -y --no-install-recommends vim
 apt-get install -y --no-install-recommends wget
 
 # A few Python/pyenv deps kept separate (some may be above though)
