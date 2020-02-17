@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 echo "Set default: show all filename extensions"
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set +x
+
 if [[ ! -x "$(command -v git)" ]]; then
     echo "Vundle installation required git" >&2
     exit 1
