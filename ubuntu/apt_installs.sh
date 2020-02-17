@@ -11,6 +11,7 @@ apt-get update -y
 apt-get autoremove -y
 
 apt-get install -y --no-install-recommends man-db
+apt-get install -y --no-install-recommends manpages-posix
 
 # Keep this alphabetized for sanity
 apt-get install -y --no-install-recommends build-essential
