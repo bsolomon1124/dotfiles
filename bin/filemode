@@ -14,6 +14,6 @@ case $1 in
     "rw-")      echo 6;;
     "rwx")      echo 7;;
     *)          echo "Invalid entry" >&2
-                return 1
+                exit 1
                 ;;
 esac
