@@ -27,7 +27,6 @@ apt-get install -y --no-install-recommends openssh-client
 apt-get install -y --no-install-recommends tree
 apt-get install -y --no-install-recommends unzip
 apt-get install -y --no-install-recommends wget
-apt-get install -y --no-install-recommends xz-utils
 
 # A few Python/pyenv deps kept separate (some may be above though)
 apt-get install -y --no-install-recommends libssl-dev
