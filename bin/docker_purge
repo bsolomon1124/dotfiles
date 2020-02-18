@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+#
+# Stop all Docker containers, remove them, and remove images
+#
+
+function echo_gn()
+{
+    echo -e "\e[1m\e[32m${*}\e[39m\e[0m"
+}
+
+function echo_yw()
+{
+    echo -e "\e[1m\e[33m${*}\e[39m\e[0m"
+}
+
+# If no containers are running, docker stop will err
+if docker stop $(docker container ls --all -q) 2>/dev/null; then
+    echo_gn "Stopped running Docker containers"
+else
+    echo_yw "No running containers; skipping"
+fi
+
+if docker rm -f $(docker container ls --all -q) 2>/dev/null; then
+    echo_gn "Removed Docker containers"
+else
+    echo_yw "No Docker containers to remove; skipping"
+fi
+
+if docker rmi $(docker image ls --all -q) 2>/dev/null; then
+    echo_gn "Removed Docker images"
+else
+    echo_yw "No Docker images to remove; skipping"
+fi

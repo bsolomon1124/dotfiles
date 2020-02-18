@@ -6,6 +6,8 @@
 
 # Set an alias only if it does not already exist.
 # N.B.: alias exit Status: alias returns true unless a NAME is supplied for which no alias has been set
+# TODO: maybe we should check that we aren't shadowing executables either; however,
+# in some cases, that is exactly what we want to do, e.g. in `rm 'rm -i'`s
 function safe_alias()
 {
     local name="$1"
@@ -73,6 +75,10 @@ safe_alias utc 'date --utc 2> /dev/null || date -u'
 
 if [[ -x "$(command -v docker)" ]]; then
     safe_alias d docker
+    safe_alias dcl 'docker container ls --all'
+    safe_alias dil 'docker image ls --all'
+    safe_alias de 'docker exec'
+    safe_alias dcp 'docker cp'
 fi
 
 safe_alias bz2 'bzip2'
