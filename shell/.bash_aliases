@@ -74,11 +74,14 @@ safe_alias is_priv_ip 'python -c "import ipaddress, sys; print(ipaddress.ip_addr
 safe_alias utc 'date --utc 2> /dev/null || date -u'
 
 if [[ -x "$(command -v docker)" ]]; then
-    safe_alias d docker
+    # We use Docker 'grouped' commands, introduced in Docker 1.13
+    # https://www.docker.com/blog/whats-new-in-docker-1-13/
     safe_alias dcl 'docker container ls --all'
+    safe_alias dci 'docker container inspect'
+    safe_alias drun 'docker container run -it --rm'
+    safe_alias de 'docker container exec'
+    safe_alias dcp 'docker container cp'
     safe_alias dil 'docker image ls --all'
-    safe_alias de 'docker exec'
-    safe_alias dcp 'docker cp'
 fi
 
 safe_alias bz2 'bzip2'
