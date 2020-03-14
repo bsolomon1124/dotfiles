@@ -62,6 +62,3 @@ export GIT_MERGE_AUTOEDIT=no
 # Add the bin/ of this repo to PATH
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd | xargs dirname)"
 export PATH="${PATH}:${DIR}/bin"
-
-# Docker: enable Docker Content Trust on this host
-export DOCKER_CONTENT_TRUST=1
