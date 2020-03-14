@@ -21,13 +21,13 @@ else
     echo_yw "No running containers; skipping"
 fi
 
-if docker container rm -f $(docker container ls --all -q) 2>/dev/null; then
+if docker container rm -vf $(docker container ls --all -q) 2>/dev/null; then
     echo_gn "Removed Docker containers"
 else
     echo_yw "No Docker containers to remove; skipping"
 fi
 
-if docker image rm $(docker image ls --all -q) 2>/dev/null; then
+if docker image rm -v $(docker image ls --all -q) 2>/dev/null; then
     echo_gn "Removed Docker images"
 else
     echo_yw "No Docker images to remove; skipping"
