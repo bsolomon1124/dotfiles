@@ -63,8 +63,11 @@ safe_alias g "git"
 command -v tree > /dev/null \
     && safe_alias pytree 'tree -P "*.py" -F --prune'
 
-command -v python > /dev/null \
-    && safe_alias pyq "python3 -q"
+if [[ -x "$(command -v python)" ]]; then
+    safe_alias pyq "python3 -q"
+    safe_alias py3 'python3'
+    safe_alias py2 'python2 -tt'
+fi
 
 safe_alias pygrep 'grep --include \\*.py'
 command -v ipython > /dev/null && safe_alias ipy 'ipython'
@@ -76,12 +79,20 @@ safe_alias utc 'date --utc 2> /dev/null || date -u'
 if [[ -x "$(command -v docker)" ]]; then
     # We use Docker 'grouped' commands, introduced in Docker 1.13
     # https://www.docker.com/blog/whats-new-in-docker-1-13/
-    safe_alias dcl 'docker container ls --all'
+    # Note that 'dc' may shadow the 'dc' Polish calculator
+    safe_alias d 'docker'
+    safe_alias dc 'docker container'
+    safe_alias dcl 'docker container ls'
     safe_alias dci 'docker container inspect'
-    safe_alias drun 'docker container run -it --rm'
-    safe_alias de 'docker container exec'
+    safe_alias dcr 'docker container run'
+    safe_alias dcri 'docker container -it --rm'
+    safe_alias dce 'docker container exec'
     safe_alias dcp 'docker container cp'
-    safe_alias dil 'docker image ls --all'
+
+    safe_alias di 'docker image'
+    safe_alias dil 'docker image ls'
+
+    safe_alias dv 'docker volume'
 fi
 
 safe_alias bz2 'bzip2'
