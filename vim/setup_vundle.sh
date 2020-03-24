@@ -9,6 +9,7 @@ fi
 
 DEST="${HOME}/.vim/bundle/Vundle.vim"
 rm -rfv "$DEST"
+mkdir -p "$DEST"
 git clone --single-branch \
     https://github.com/VundleVim/Vundle.vim.git \
     "$DEST"
