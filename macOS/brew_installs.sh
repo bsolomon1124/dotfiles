@@ -42,6 +42,7 @@ brew install --verbose redis
 brew install --verbose R
 brew install --verbose ripgrep
 brew install --verbose scala
+brew install --verbose scalafmt
 brew install --verbose shellcheck
 brew install --verbose sqlite
 brew install --verbose tree
