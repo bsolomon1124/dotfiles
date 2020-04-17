@@ -1,9 +1,11 @@
+amazonlinux:2
 centos:7
 centos:8
 openjdk:8
 alpine:3
 debian:10
 ubuntu:bionic
+ubuntu:eoan
 python:3-alpine
 python:2-alpine
 python:3-slim
