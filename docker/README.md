@@ -4,7 +4,7 @@ The file `image_list.txt` is a list of commonly-used Docker images for download:
 while read img; do
   if [[ -n "$img" ]]; then
     echo "PULLING: $img"
-    docker pull "$img"
+    docker image pull "$img"
   fi
 done <image_list.txt
 
