@@ -45,6 +45,7 @@ brew install --verbose scala
 brew install --verbose --HEAD olafurpg/scalafmt/scalafmt
 brew install --verbose --HEAD olafurpg/scalafmt/scalafix
 brew install --verbose shellcheck
+brew install --verbose shfmt
 brew install --verbose sqlite
 brew install --verbose tree
 brew install --verbose unrar
