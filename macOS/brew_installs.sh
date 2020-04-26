@@ -25,8 +25,10 @@ brew install --verbose coreutils
 brew install --verbose cppcheck
 brew install --verbose dos2unix
 brew install --verbose fd
+brew install --verbose gawk
 brew install --verbose gcc
 brew install --verbose geoip
+brew install --verbose gnu-sed
 brew install --verbose golang
 brew install --verbose greadline
 brew install --verbose hadolint
@@ -46,6 +48,7 @@ brew install --verbose --HEAD olafurpg/scalafmt/scalafmt
 brew install --verbose --HEAD olafurpg/scalafmt/scalafix
 brew install --verbose shellcheck
 brew install --verbose shfmt
+brew install --verbose shyaml
 brew install --verbose sqlite
 brew install --verbose tree
 brew install --verbose unrar
