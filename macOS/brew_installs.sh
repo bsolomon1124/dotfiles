@@ -13,46 +13,56 @@ brew update --verbose
 brew upgrade --verbose
 brew cleanup --verbose
 
-brew install --verbose ack
-brew install --verbose autojump
-brew install --verbose bash-completion
-brew install --verbose bat
-brew install --verbose cask
-brew install --verbose cloc
-brew install --verbose clang-format
-brew install --verbose colordiff
-brew install --verbose coreutils
-brew install --verbose cppcheck
-brew install --verbose dos2unix
-brew install --verbose fd
-brew install --verbose gawk
-brew install --verbose gcc
-brew install --verbose geoip
-brew install --verbose gnu-sed
-brew install --verbose golang
-brew install --verbose greadline
-brew install --verbose hadolint
-brew install --verbose htop
-brew install --verbose httpie
-brew install --verbose jq
-brew install --verbose nmap
-brew install --verbose node
-brew install --verbose postgresql
-brew install --verbose pyenv
-brew install --verbose readline
-brew install --verbose redis
-brew install --verbose R
-brew install --verbose ripgrep
-brew install --verbose scala
-brew install --verbose --HEAD olafurpg/scalafmt/scalafmt
-brew install --verbose --HEAD olafurpg/scalafmt/scalafix
-brew install --verbose shellcheck
-brew install --verbose shfmt
-brew install --verbose shyaml
-brew install --verbose sqlite
-brew install --verbose tree
-brew install --verbose unrar
-brew install --verbose vim
-brew install --verbose watch
-brew install --verbose wget
-brew install --verbose xz
+# http://redsymbol.net/articles/unofficial-bash-strict-mode/
+set +x
+ORIG_IFS="$IFS"
+IFS=$'\n\t'
+pkgs=(
+  'ack'
+  'autojump'
+  'bash-completion'
+  'bat'
+  'cask'
+  'cloc'
+  'clang-format'
+  'colordiff'
+  'coreutils'
+  'cppcheck'
+  'dos2unix'
+  'fd'
+  'gawk'
+  'gcc'
+  'geoip'
+  'gnu-sed'
+  'golang'
+  'greadline'
+  'hadolint'
+  'htop'
+  'httpie'
+  'jq'
+  'nmap'
+  'node'
+  'postgresql'
+  'pyenv'
+  'readline'
+  'redis'
+  'R'
+  'ripgrep'
+  'scala'
+  '--HEAD olafurpg/scalafmt/scalafmt'
+  '--HEAD olafurpg/scalafmt/scalafix'
+  'shellcheck'
+  'shfmt'
+  'shyaml'
+  'sqlite'
+  'tree'
+  'unrar'
+  'vim'
+  'watch'
+  'wget'
+  'xz'
+)
+for name in ${pkgs[@]}; do
+  brew install $name
+done
+IFS="$ORIG_IFS"
