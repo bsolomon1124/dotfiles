@@ -44,6 +44,7 @@ pkgs=(
   'node'
   'postgresql'
   'pyenv'
+  'pygments'
   'readline'
   'redis'
   'R'
