@@ -4,6 +4,8 @@
 # Upgrade pyenv Python versions to latest PATCH version for each MINOR
 # Uninstall stale versions
 #
+# Installs production releases only, no dev/rc/a/b.
+#
 
 if [[ ! -x "$(command -v pyenv)" ]]; then
     echo "pyenv not found; exiting" >&2
@@ -19,7 +21,7 @@ echo "Uninstalling outdated MINOR versions..."
 STALE_VERSIONS=($(\
     pyenv install --list \
     | grep --extended-regexp '^\s+\d' \
-    | grep -vE 'dev|rc' \
+    | grep -vE 'dev|rc|a|b' \
     | grep -vE '\s+2\.[1-6]' \
     | grep -vE '\s+3\.[0-4]' \
     | "$(dirname $(stat -f $0))"/_pyenv_stale.py\
@@ -33,7 +35,7 @@ echo "Installing latest PATCH version for each MINOR version..."
 LATEST_VERSIONS=($(\
     pyenv install --list \
     | grep --extended-regexp '^\s+\d' \
-    | grep -vE 'dev|rc' \
+    | grep -vE 'dev|rc|a|b' \
     | grep -vE '\s+2\.[1-6]' \
     | grep -vE '\s+3\.[0-4]' \
     | "$(dirname $(stat -f $0))"/_pyenv_latest.py\
