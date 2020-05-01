@@ -96,8 +96,6 @@ if [[ -x "$(command -v docker)" ]]; then
 fi
 
 safe_alias bz2 'bzip2'
-
-
 safe_alias tarls 'tar --list --verbose --file'
 
 # Change terminal window size
@@ -115,3 +113,6 @@ safe_alias ca "chmod a+rwx"
 
 # Personally, I think this is much less work than using `jq`
 safe_alias json 'python -m json.tool --sort-keys'
+
+safe_alias unwrap 'less -S'
+safe_alias nowrap 'less -S'
