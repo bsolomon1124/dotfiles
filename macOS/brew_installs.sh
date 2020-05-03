@@ -50,6 +50,7 @@ pkgs=(
   'nmap'
   'node'
   'postgresql'
+  'pre-commit'
   'pyenv'
   'pygments'
   'readline'

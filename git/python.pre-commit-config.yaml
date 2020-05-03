@@ -1,0 +1,43 @@
+repos:
+
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: 'v2.3.0'
+  hooks:
+  - id: check-ast
+  - id: check-builtin-literals
+  - id: debug-statements
+  - id: name-tests-test
+  - id: requirements-txt-fixer
+
+- repo: https://github.com/psf/black
+  rev: stable
+  hooks:
+  - id: black
+
+- repo: https://github.com/timothycrosley/isort
+  rev: '4.3.21'
+  hooks:
+  - id: isort
+    files: \.py$
+
+- repo: https://github.com/pre-commit/pygrep-hooks
+  rev: 'v1.5.1'
+  hooks:
+  - id: python-check-blanket-noqa
+  - id: python-no-log-warn
+  - id: python-no-eval
+  - id: rst-backticks
+    files: \.rst$
+    types: [file]
+  - id: python-use-type-annotations
+  - id: text-unicode-replacement-char
+
+- repo: https://github.com/mgedmin/check-manifest
+  rev: '0.39'
+  hooks:
+  - id: check-manifest
+
+- repo: https://github.com/asottile/pyupgrade
+  rev: 'v2.3.0'
+  hooks:
+  - id: pyupgrade
