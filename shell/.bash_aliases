@@ -93,6 +93,8 @@ if [[ -x "$(command -v docker)" ]]; then
     safe_alias dil 'docker image ls'
 
     safe_alias dv 'docker volume'
+
+    safe_alias docker_update_imgs 'docker image ls --format "{{.Repository}}:{{.Tag}}" | xargs -L1 docker image pull'
 fi
 
 safe_alias bz2 'bzip2'
