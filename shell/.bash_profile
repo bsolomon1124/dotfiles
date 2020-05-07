@@ -33,12 +33,11 @@ grab_git_completion_script "git-completion.bash" &&  source ~/.git-completion.ba
 source "${CONFIG_PATH}/shell/environ"
 source "${CONFIG_PATH}/shell/.bash_aliases"
 
-# Bash prompt - looks like
-# user ~/path/to/di git:branchname
+# Bash prompt - looks like `user ~/path/to/directory git:branchname`
 if [[ "$(command -v __git_ps1)" ]]; then
-    PS1='\n\[\033[32m\]\u \[\033[33m\]\w\[\033[35m\]$(__git_ps1 " git:%s")\[\033[0m\]\n\$ '
+    PS1='\n\[\033[36m\]\u \[\033[34m\]\w\[\033[35m\]$(__git_ps1 " git:%s")\[\033[96m\]\n\$\[\033[0m\] '
 else
-    PS1='\n\[\033[32m\]\u \[\033[33m\]\w\[\033[35m\]\[\033[0m\]\n\$ '
+    PS1='\n\[\033[36m\]\u \[\033[34m\]\w\[\033[96m\]\n\$\[\033[0m\] '
 fi
 export PS1
 
