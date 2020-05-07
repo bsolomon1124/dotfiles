@@ -4,12 +4,15 @@
 # Formal environ (see `man environ`)
 #
 
-# The timezone to use when displaying dates.  The normal format is a pathname relative to '/usr/share/zoneinfo'
+# The timezone to use when displaying dates.  The normal format is a
+# pathname relative to '/usr/share/zoneinfo'
 export TZ='America/New_York'
 
-# LC_ALL overrides the values of LC_COLLATE, LC_CTYPE, LC_MESSAGES, LC_MONETARY, LC_NUMERIC, LC_TIME and LANG.
+# LC_ALL overrides the values of LC_COLLATE, LC_CTYPE, LC_MESSAGES,
+# LC_MONETARY, LC_NUMERIC, LC_TIME and LANG.
 export LANG='en_US.UTF-8'
 export LANG_ALL='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
 
 export EDITOR='vim'
 
@@ -22,8 +25,8 @@ export EDITOR='vim'
 #       /bin
 #       /usr/sbin
 #       /sbin
-# - The internal `path_helper` utility then reads the contents of the files in /etc/paths.d
-#   and appends their contents to PATH
+# - The internal `path_helper` utility then reads the contents of the
+#   files in /etc/paths.d and appends their contents to PATH
 if [[ "$(uname)" -eq "Darwin" ]]; then
     export PATH="/usr/local/sbin:${HOME}/bin:${PATH}"
 fi
@@ -48,9 +51,18 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
 export BAT_THEME='Monokai Extended Light'
-export GIT_MERGE_AUTOEDIT=no
-
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
+
+# Unstaged (*) and staged (+) changes will be shown next to the branch name
+# with __git_ps1
+export GIT_PS1_SHOWDIRTYSTATE=1
+
+# A '%' will be shown next to the branch name with __git_ps1 if there are
+# any untracked files
+export GIT_PS1_SHOWUNTRACKEDFILES=1
+
+# Mimic --no-edit by default
+export GIT_MERGE_AUTOEDIT=no
 
 # Add the bin/ of this repo to PATH
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd | xargs dirname)"
