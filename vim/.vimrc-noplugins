@@ -31,6 +31,7 @@ hi ColorColumn ctermbg=grey
 :set ignorecase                   " ignore case when searching
 :set incsearch                    " incremental search
 :set mouse=a                      " enable mouse usage (all modes)
+:set noerrorbells vb t_vb=        " don't bell or blink
 :set nowrap                       " don't wrap lines
 :set number                       " precede each line with its line number
 :set ruler                        " show the line and column number of the cursor position, separated by a comma
