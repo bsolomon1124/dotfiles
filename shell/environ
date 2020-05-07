@@ -51,7 +51,6 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
 export BAT_THEME='Monokai Extended Light'
-export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
 
 # Unstaged (*) and staged (+) changes will be shown next to the branch name
 # with __git_ps1
