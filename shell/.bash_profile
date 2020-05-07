@@ -36,10 +36,12 @@ source "${CONFIG_PATH}/shell/.bash_aliases"
 # Prompts (Bash Prompt String 1 (use PS1=$PSLONG/$PSSHORT))
 # Hijacked in part from https://github.com/mitsuhiko/dotfiles/blob/master/bash/bashrc
 if [[ "$(command -v __git_ps1)" ]]; then
-    PS1='[\u in \W$(__git_ps1 " on git:%s")]
+    PS1='
+[\u in \W$(__git_ps1 " on git:%s")]
 \$ '
 else
-    PS1='[\u in \W]
+    PS1='
+[\u in \W]
 \$ '
 fi
 export PS1
