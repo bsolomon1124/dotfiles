@@ -40,6 +40,3 @@ else
     PS1='\n\[\033[36m\]\u \[\033[34m\]\w\[\033[96m\]\n\$\[\033[0m\] '
 fi
 export PS1
-
-shopt -s histappend
-shopt -s checkwinsize
