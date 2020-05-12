@@ -15,6 +15,7 @@
     old = red strike
     new = green italic
 [alias]
+    b     = branch
     l     = log
     sg    = log --oneline --graph --date=short
     logrec = log --format='%h %Cgreen %ad %Creset %s' --no-merges --date='format:%b %d: %H:%M %z'
