@@ -16,7 +16,7 @@ pyenv local --unset
 pyenv shell --unset
 pyenv global system
 
-echo -e "\e[34mUpgrading pyenv and availabel Python versions\e[39m"
+echo -e "\e[34mUpgrading pyenv and available Python versions\e[39m"
 pushd $(pyenv root)
 git pull
 popd
