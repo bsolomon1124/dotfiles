@@ -12,6 +12,10 @@ if [[ ! -x "$(command -v pyenv)" ]]; then
     exit 1
 fi
 
+pyenv local --unset
+pyenv shell --unset
+pyenv global system
+
 echo -e "\e[34mUpgrading pyenv and availabel Python versions\e[39m"
 pushd $(pyenv root)
 git pull
