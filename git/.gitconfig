@@ -27,7 +27,7 @@
     st    = status
     sb    = status -sb
     pom   = push origin master
-    sincetag = log "$(git describe --tags --abbrev=0)"..HEAD
+    sincetag = "!f() { git log $(git describe --tags --abbrev=0)..HEAD; }; f"
     nuke = "!f() { git branch -D \"$1\" && git push origin --delete \"$1\"; }; f"
     tags = tag -l
     branches = branch -a
