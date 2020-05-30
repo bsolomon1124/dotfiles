@@ -11,14 +11,14 @@ if [ -f /etc/bashrc ]; then
 fi
 
 if [[ ! -f "${HOME}/.CONFIG_PATH" ]]; then
-	echo "CONFIG_PATH not set; exiting" >&2
-	exit 1
+    echo "CONFIG_PATH not set; exiting" >&2
+    exit 1
 fi
 
 CONFIG_PATH=$(<.CONFIG_PATH)
 if [[ -z "$CONFIG_PATH" ]]; then
-	echo "CONFIG_PATH empty; exiting" >&2
-	exit 1
+    echo "CONFIG_PATH empty; exiting" >&2
+    exit 1
 fi
 
 if [[ ! -d "$CONFIG_PATH" ]]; then
@@ -33,7 +33,7 @@ function grab_git_completion_script()
         if [[ "$(command -v locate)" ]]; then
             locate -0 -l 1 "$scriptname" | xargs -I % -t -0 cp % "$HOME/.$scriptname"
         elif [[ "$(command -v mdfind)" ]]; then
-        	mdfind -name "$scriptname"  | head -n1 | xargs -I % -t cp % "$HOME/.$scriptname"
+            mdfind -name "$scriptname"  | head -n1 | xargs -I % -t cp % "$HOME/.$scriptname"
         else
             find / -name "$scriptname" -type f -exec cp {} "$HOME/.$scriptname" \; -quit 2>/dev/null
         fi
