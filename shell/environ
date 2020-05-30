@@ -14,7 +14,14 @@ export LANG='en_US.UTF-8'
 export LANG_ALL='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
 
-export EDITOR='vim'
+# Set Sublime Text as editor
+# https://www.sublimetext.com/docs/3/osx_command_line.html
+if [[ -x "$(command -v subl)" ]]; then
+    export EDITOR='subl -w'
+else
+    echo "WARNING: Could not find subl.  Setting editor to Vim" >&2
+    export EDITOR='vim'
+fi
 
 # A brief 'how is my PATH obtained on macOS?' primer:
 #
