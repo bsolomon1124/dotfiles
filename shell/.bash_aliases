@@ -55,8 +55,11 @@ safe_alias execsh "exec ${SHELL} -l"
 # Print each $PATH entry on a separate line
 safe_alias ppath 'echo -e "${PATH//:/\\n}" | sort -f'
 
-# TODO: works on Linux?
-safe_alias updatedb 'sudo /usr/libexec/locate.updatedb'
+if [[ -x "$(command -v locate)" ]]; then
+    safe_alias updatedb 'sudo /usr/libexec/locate.updatedb'
+    safe_alias where 'locate'
+    safe_alias loc 'locate'
+fi
 
 safe_alias pubip 'dig +short myip.opendns.com @resolver1.opendns.com 2> /dev/null || (curl ifconfig.me/ip && echo)'
 
