@@ -10,9 +10,19 @@ if [ -f /etc/bashrc ]; then
       source /etc/bashrc
 fi
 
-CONFIG_PATH="${HOME}/Scripts/python/projects/bsolomon1124/config"
+if [[ ! -f "${HOME}/.CONFIG_PATH" ]]; then
+	echo "CONFIG_PATH not set; exiting" >&2
+	exit 1
+fi
+
+CONFIG_PATH=$(<.CONFIG_PATH)
+if [[ -z "$CONFIG_PATH" ]]; then
+	echo "CONFIG_PATH empty; exiting" >&2
+	exit 1
+fi
+
 if [[ ! -d "$CONFIG_PATH" ]]; then
-    echo "Missing configuration files at $CONFIG_PATH" >&2
+    echo "Missing configuration files at CONFIG_PATH '$CONFIG_PATH'" >&2
     exit 1
 fi
 
@@ -22,11 +32,12 @@ function grab_git_completion_script()
     if [[ ! -f "$HOME/.$scriptname" ]]; then
         if [[ "$(command -v locate)" ]]; then
             locate -0 -l 1 "$scriptname" | xargs -I % -t -0 cp % "$HOME/.$scriptname"
-        else if [[ "$(command -v mdfind)" ]]; then
+        elif [[ "$(command -v mdfind)" ]]; then
         	mdfind -name "$scriptname"  | head -n1 | xargs -I % -t cp % "$HOME/.$scriptname"
         else
             find / -name "$scriptname" -type f -exec cp {} "$HOME/.$scriptname" \; -quit 2>/dev/null
         fi
+
         if [[ ! -f "$HOME/.$scriptname" ]]; then
             curl -sSL -o "$HOME/.$scriptname" "https://raw.githubusercontent.com/git/git/master/contrib/completion/$scriptname"
         fi
