@@ -22,6 +22,8 @@ function grab_git_completion_script()
     if [[ ! -f "$HOME/.$scriptname" ]]; then
         if [[ "$(command -v locate)" ]]; then
             locate -0 -l 1 "$scriptname" | xargs -I % -t -0 cp % "$HOME/.$scriptname"
+        else if [[ "$(command -v mdfind)" ]]; then
+        	mdfind -name "$scriptname"  | head -n1 | xargs -I % -t cp % "$HOME/.$scriptname"
         else
             find / -name "$scriptname" -type f -exec cp {} "$HOME/.$scriptname" \; -quit 2>/dev/null
         fi
