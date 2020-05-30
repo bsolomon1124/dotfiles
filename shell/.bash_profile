@@ -1,3 +1,7 @@
+# Don't print 'The default interactive shell is now zsh'
+# on login.  https://support.apple.com/en-us/HT208050
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 # If not running interactively (i.e. we are via `bash argv`), don't do anything
 [ -z "$PS1" ] && return
 
