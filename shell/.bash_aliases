@@ -126,3 +126,11 @@ safe_alias json 'python -m json.tool --sort-keys'
 
 safe_alias unwrap 'less -S'
 safe_alias nowrap 'less -S'
+
+safe_alias cv 'command -v'
+
+if [[ -x "$(command -v pbcopy)" ]]; then
+    cpf() {
+        pbcopy < "$1"
+    }
+fi
