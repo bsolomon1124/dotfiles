@@ -25,4 +25,3 @@ if __name__ == "__main__":
     import sys
 
     stale_minor_versions(sys.stdin.read())
-

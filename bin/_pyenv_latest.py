@@ -22,4 +22,3 @@ if __name__ == "__main__":
     import sys
 
     most_recent_minor_versions(sys.stdin.read())
-

@@ -20,7 +20,7 @@ echo
 
 echo "$CONFIG_PATH" > "${CONFIG_PATH}/.CONFIG_PATH"
 echo "Wrote CONFIG_PATH '$CONFIG_PATH' to ${CONFIG_PATH}/.CONFIG_PATH"
-ln -svf "${CONFIG_PATH}/.CONFIG_PATH" "${HOME}/.CONFIG_PATH" 
+ln -svf "${CONFIG_PATH}/.CONFIG_PATH" "${HOME}/.CONFIG_PATH"
 echo
 
 if [[ -f "${HOME}/.bash_profile" ]]; then
@@ -43,4 +43,3 @@ if prompt_yesno "Symlink Git configuration?"; then
         fi
     fi
 fi
-
