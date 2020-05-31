@@ -24,12 +24,15 @@ ln -svf "${CONFIG_PATH}/.CONFIG_PATH" "${HOME}/.CONFIG_PATH"
 echo
 
 if [[ -f "${HOME}/.bash_profile" ]]; then
-    if prompt_yesno 'Overwrite ~/.bash_profile?'; then
+    if ! prompt_yesno 'Overwrite ~/.bash_profile?'; then
+        "Skipping overwrite of ~/.bash_profile"
+    else
         ln -vfs "${CONFIG_PATH}/shell/.bash_profile" "${HOME}/.bash_profile"
     fi
 else
-    "Skipping overwrite of ~/.bash_profile"
+    ln -vfs "${CONFIG_PATH}/shell/.bash_profile" "${HOME}/.bash_profile"
 fi
+
 echo
 
 if prompt_yesno "Symlink Git configuration?"; then
