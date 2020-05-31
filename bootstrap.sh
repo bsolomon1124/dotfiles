@@ -43,3 +43,6 @@ if prompt_yesno "Symlink Git configuration?"; then
         fi
     fi
 fi
+
+ln -vs "${CONFIG_PATH}/.screenrc" "${HOME}/.screenrc"
+ln -vs "${CONFIG_PATH}/db/.sqliterc" "${HOME}/.sqliterc"
