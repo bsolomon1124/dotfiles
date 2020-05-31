@@ -137,3 +137,7 @@ if [[ -x "$(command -v pbcopy)" ]]; then
         pbcopy < "$1"
     }
 fi
+
+# Shutdown/restart/etc
+safe_alias restart 'sudo shutdown -r now'
+safe_alias sd 'sudo shutdown -h now'
