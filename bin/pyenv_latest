@@ -17,9 +17,13 @@ pyenv shell --unset
 pyenv global system
 
 echo -e "\e[34mUpgrading pyenv and available Python versions\e[39m"
-pushd $(pyenv root)
-git pull
-popd
+if brew list --versions pyenv > /dev/null; then
+    brew upgrade pyenv
+else
+    pushd $(pyenv root)
+    git pull
+    popd
+fi
 
 echo "Uninstalling outdated MINOR versions..."
 STALE_VERSIONS=($(\

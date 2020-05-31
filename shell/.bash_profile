@@ -15,6 +15,9 @@ if [[ ! -f "${HOME}/.CONFIG_PATH" ]]; then
     exit 1
 fi
 
+# Disable builtin 'command', which does not show the full path
+enable -n command
+
 CONFIG_PATH=$(<.CONFIG_PATH)
 if [[ -z "$CONFIG_PATH" ]]; then
     echo "CONFIG_PATH empty; exiting" >&2
@@ -46,6 +49,33 @@ function grab_git_completion_script()
 
 grab_git_completion_script "git-prompt.sh" &&  source ~/.git-prompt.sh
 grab_git_completion_script "git-completion.bash" &&  source ~/.git-completion.bash
+
+# Pyenv: https://github.com/pyenv/pyenv#basic-github-checkout
+# Need to account for if pyenv was installed through brew,
+# in which case it will not be under ~ and we do *not* need
+# to manipulate path or PYENV_ROOT
+if brew list --versions pyenv > /dev/null; then
+    if [[ -x "$(command -v pyenv)" ]]; then
+        eval "$(pyenv init -)"
+    else
+        echo 'Issue finding pyenv (installed by brew but not on PATH); skipping' >&2
+    fi
+    if [[ -x "$(command -v pyenv-virtualenv-init)" ]]; then
+        eval "$(pyenv virtualenv-init -)"
+    fi
+elif [[ -d "$HOME/.pyenv" ]]; then
+    export PATH="$HOME/.pyenv/bin:$PATH"
+    if [[ -x "$(command -v pyenv)" ]]; then
+        eval "$(pyenv init -)"
+        if [[ -x "$(command -v pyenv-virtualenv-init)" ]]; then
+            eval "$(pyenv virtualenv-init -)"
+        fi
+    else
+        echo 'Issue finding pyenv (Installed from Git but not on PATH); skipping' >&2
+    fi
+else
+    echo 'Issue finding pyenv (other; investigate); skipping' >&2
+fi
 
 source "${CONFIG_PATH}/shell/environ"
 source "${CONFIG_PATH}/shell/.bash_aliases"

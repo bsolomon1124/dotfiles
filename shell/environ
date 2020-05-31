@@ -38,16 +38,6 @@ if [[ "$(uname)" -eq "Darwin" ]]; then
     export PATH="/usr/local/sbin:${HOME}/bin:${PATH}"
 fi
 
-# Pyenv: https://github.com/pyenv/pyenv#basic-github-checkout
-if [[ -d "$HOME/.pyenv" ]]; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$HOME/.pyenv/bin:$PATH"
-fi
-if [[ -x "$(command -v pyenv)" ]]; then
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-fi
-
 # LESS man page colors (makes Man pages more readable)
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
@@ -58,6 +48,9 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
 export BAT_THEME='Monokai Extended Light'
+
+# use git:// instead of https:// for git clone
+export USE_GIT_URI=1
 
 # Unstaged (*) and staged (+) changes will be shown next to the branch name
 # with __git_ps1
