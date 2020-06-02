@@ -1,19 +1,9 @@
-# System-wide Git configuration
-# To find where this file sits, use
-# `git config --global --edit`; it is probably at
-# ~/.gitconfig
-# On Linux, can also put at /etc/gitconfig
+# Git configuration
+# Place at ~/.gitconfig for global config
+# See also the 'FILES' section of 'git help config'
 [user]
     name = Brad Solomon
     email = bsolomon@protonmail.com
-[color]
-    diff = auto
-    stats = auto
-    branch = auto
-    ui = true
-[color "diff"]
-    old = red strike
-    new = green italic
 [alias]
     b     = branch
     l     = log
@@ -35,5 +25,23 @@
     aliases = config --get-regexp alias
     contribs = shortlog --summary --numbered
 [core]
-    editor = vim
+    editor = subl -w
     excludesfile = ~/.gitignore_global
+    pager = diff-so-fancy | less --tabs=4 -RFX
+[color]
+    diff = auto
+    stats = auto
+    branch = auto
+    ui = true
+[color "diff"]
+    old = red bold
+    new = green bold
+    meta = 11
+    frag = magenta bold
+    commit = yellow bold
+    whitespace = red reverse
+[color "diff-highlight"]
+    oldNormal = red bold
+    oldHighlight = red bold 52
+    newNormal = green bold
+    newHighlight = green bold 22

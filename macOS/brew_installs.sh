@@ -30,6 +30,7 @@ pkgs=(
   'colordiff'
   'coreutils'
   'cppcheck'
+  'diff-so-fancy'
   'dos2unix'
   'fd'
   'findutils'
