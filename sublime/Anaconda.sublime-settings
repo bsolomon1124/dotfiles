@@ -2,11 +2,7 @@
     Anaconda user settings
 */
 {
-    "python_interpreter": "/Users/brad/anaconda3/bin/python3",
-
-    /*
-        Set to false to disable Anaconda linting entirely.
-    */
+    // Set to false to disable Anaconda linting entirely.
     "anaconda_linting": false,
 
     // Set this to false to turn pep8 checking off completely.
