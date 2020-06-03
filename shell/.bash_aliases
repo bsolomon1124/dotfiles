@@ -96,7 +96,7 @@ if [[ -x "$(command -v docker)" ]]; then
     safe_alias dcl 'docker container ls'
     safe_alias dci 'docker container inspect'
     safe_alias dcr 'docker container run'
-    safe_alias dcri 'docker container -it --rm'
+    safe_alias dcri 'docker container run -it --rm'
     safe_alias dce 'docker container exec'
     safe_alias dcp 'docker container cp'
 
