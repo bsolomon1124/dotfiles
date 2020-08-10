@@ -74,6 +74,9 @@ export TERM=xterm-256color
 # configure `export PYENV_VIRTUALENV_DISABLE_PROMPT=1' to simulate the behavior."
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
+# Turn off cowsay Ansible output
+export ANSIBLE_NOCOWS=1
+
 # Shell options
 # https://www.gnu.org/software/bash/manual/html_node/The-Shopt-Builtin.html
 shopt -s checkwinsize
