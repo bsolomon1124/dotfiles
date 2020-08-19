@@ -57,8 +57,6 @@ grab_git_completion_script "git-completion.bash" &&  source ~/.git-completion.ba
 if brew list --versions pyenv > /dev/null; then
     if [[ -x "$(command -v pyenv)" ]]; then
         eval "$(pyenv init -)"
-    else
-        echo 'Issue finding pyenv (installed by brew but not on PATH); skipping' >&2
     fi
     if [[ -x "$(command -v pyenv-virtualenv-init)" ]]; then
         eval "$(pyenv virtualenv-init -)"
@@ -70,11 +68,7 @@ elif [[ -d "$HOME/.pyenv" ]]; then
         if [[ -x "$(command -v pyenv-virtualenv-init)" ]]; then
             eval "$(pyenv virtualenv-init -)"
         fi
-    else
-        echo 'Issue finding pyenv (Installed from Git but not on PATH); skipping' >&2
     fi
-else
-    echo 'Issue finding pyenv (other; investigate); skipping' >&2
 fi
 
 source "${CONFIG_PATH}/shell/environ"
@@ -82,7 +76,7 @@ source "${CONFIG_PATH}/shell/.bash_aliases"
 
 # Bash prompt - looks like `user ~/path/to/directory git:branchname`
 if [[ "$(type -t '__git_ps1')" == 'function' ]]; then
-    PS1='\n\[\033[36m\]\u \[\033[34m\]\w\[\033[35m\]$(__git_ps1 " git:%s")\[\033[96m\]\n\$\[\033[0m\] '
+    PS1='\n\[\033[36m\]\u \[\033[34m\]\w\[\033[35m\]$(__git_ps1 " -> %s")\[\033[96m\]\n\$\[\033[0m\] '
 else
     PS1='\n\[\033[36m\]\u \[\033[34m\]\w\[\033[96m\]\n\$\[\033[0m\] '
 fi
