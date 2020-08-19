@@ -5,25 +5,25 @@
     name = Brad Solomon
     email = bsolomon@protonmail.com
 [alias]
-    b     = branch
-    l     = log
-    sg    = log --oneline --graph --date=short
-    logrec = log --format='%h %Cgreen %ad %Creset %s' --no-merges --date='format:%b %d: %H:%M %z'
-    sgs   = sg -n 15
-    a     = add
-    ci    = commit
-    d     = diff
-    s     = status
-    st    = status
-    sb    = status -sb
-    pom   = push origin master
-    sincetag = "!f() { git log $(git describe --tags --abbrev=0)..HEAD; }; f"
-    nuke = "!f() { git branch -D \"$1\" && git push origin --delete \"$1\"; }; f"
-    tags = tag -l
-    branches = branch -a
-    remotes = remote -v
-    aliases = config --get-regexp alias
-    contribs = shortlog --summary --numbered
+    b           = branch
+    l           = log
+    sg          = log --oneline --graph --date=short
+    lr          = log --format='%h %Cgreen %ad %Creset %s' --no-merges --date='format:%b %d: %H:%M %z'
+    sgs         = sg -n 15
+    a           = add
+    ci          = commit
+    cam         = commit -a -m
+    d           = diff
+    s           = status
+    st          = status
+    sb          = status -sb
+    sincetag    = "!f() { git log $(git describe --tags --abbrev=0)..HEAD; }; f"
+    nuke        = "!f() { git branch -D \"$1\" && git push origin --delete \"$1\"; }; f"
+    tags        = tag -l
+    bs          = branch -a
+    rv          = remote -v
+    aliases     = config --get-regexp alias
+    contribs    = shortlog --summary --numbered
 [core]
     editor = subl -w
     excludesfile = ~/.gitignore_global
@@ -45,3 +45,6 @@
     oldHighlight = red bold 52
     newNormal = green bold
     newHighlight = green bold 22
+[credential]
+    # chmod 600 ~/.git-credentials over HTTPS
+    helper = store
