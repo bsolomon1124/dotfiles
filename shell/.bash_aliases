@@ -78,6 +78,7 @@ if [[ -x "$(command -v python)" ]]; then
     safe_alias pyq "python3 -q"
     safe_alias py3 'python3'
     safe_alias py2 'python2 -tt'
+    safe_alias venv 'python -m venv venv && . ./venv/bin/activate'
 fi
 
 safe_alias pygrep 'grep --include \\*.py'
