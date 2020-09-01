@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+ffmpeg -i $1 -s $2x$3 -pix_fmt rgb24 -r 20 -f gif - | gifsicle --optimize=3 --delay=3 > out.gif
