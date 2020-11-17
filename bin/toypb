@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -ex
+
+tgt="${1:-toypb.yaml}"
+if [[ -f "$tgt" ]]; then
+    cp "$tgt" "${tgt}.bak"
+fi
+
+cat << EOF > "$tgt"
+- name: test playbook
+  hosts: localhost
+  connection: local
+  tasks:
+    - debug:
+        msg: "this is a toy playbook used for debugging Ansible"
+EOF
