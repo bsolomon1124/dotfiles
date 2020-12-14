@@ -34,36 +34,34 @@ function grab_git_completion_script()
     local scriptname="$1"
     if [[ ! -f "$HOME/.$scriptname" ]]; then
         if [[ "$(command -v locate)" ]]; then
-            locate -0 -l 1 "$scriptname" | xargs -I % -t -0 cp % "$HOME/.$scriptname"
+            locate -0 -l 1 "$scriptname" | $(type -p gxargs xargs | head -n1 ) -r -I % -t -0 cp % "$HOME/.$scriptname"
         elif [[ "$(command -v mdfind)" ]]; then
-            mdfind -name "$scriptname"  | head -n1 | xargs -I % -t cp % "$HOME/.$scriptname"
+            mdfind -name "$scriptname"  | head -n1 | $(type -p gxargs xargs | head -n1 ) -r -I % -t cp % "$HOME/.$scriptname"
         else
             find / -name "$scriptname" -type f -exec cp {} "$HOME/.$scriptname" \; -quit 2>/dev/null
         fi
 
         if [[ ! -f "$HOME/.$scriptname" ]]; then
-            curl -sSL -o "$HOME/.$scriptname" "https://raw.githubusercontent.com/git/git/master/contrib/completion/$scriptname"
+            curl -fsSL -o "$HOME/.$scriptname" "https://raw.githubusercontent.com/git/git/master/contrib/completion/$scriptname"
         fi
     fi
 }
 
-grab_git_completion_script "git-prompt.sh" &&  source ~/.git-prompt.sh
-grab_git_completion_script "git-completion.bash" &&  source ~/.git-completion.bash
+grab_git_completion_script "git-prompt.sh" && source ~/.git-prompt.sh
+grab_git_completion_script "git-completion.bash" && source ~/.git-completion.bash
 
 # Pyenv: https://github.com/pyenv/pyenv#basic-github-checkout
 # Need to account for if pyenv was installed through brew,
 # in which case it will not be under ~ and we do *not* need
 # to manipulate path or PYENV_ROOT
-if brew list --versions pyenv > /dev/null; then
-    if [[ -x "$(command -v pyenv)" ]]; then
+if [[ -x "$(command -v pyenv)" ]]; then
+    if brew list --versions pyenv > /dev/null; then
         eval "$(pyenv init -)"
-    fi
-    if [[ -x "$(command -v pyenv-virtualenv-init)" ]]; then
-        eval "$(pyenv virtualenv-init -)"
-    fi
-elif [[ -d "$HOME/.pyenv" ]]; then
-    export PATH="$HOME/.pyenv/bin:$PATH"
-    if [[ -x "$(command -v pyenv)" ]]; then
+        if [[ -x "$(command -v pyenv-virtualenv-init)" ]]; then
+            eval "$(pyenv virtualenv-init -)"
+        fi
+    elif [[ -d "$HOME/.pyenv" ]]; then
+        export PATH="$HOME/.pyenv/bin:$PATH"
         eval "$(pyenv init -)"
         if [[ -x "$(command -v pyenv-virtualenv-init)" ]]; then
             eval "$(pyenv virtualenv-init -)"
