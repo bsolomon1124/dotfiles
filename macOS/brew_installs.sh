@@ -3,6 +3,7 @@
 #
 # Install/update brew; install some common tools via brew
 #
+# TODO: convert this to a Brewfile
 
 set -x
 
@@ -45,6 +46,7 @@ pkgs=(
   'greadline'
   'grep'
   'hadolint'
+  'hey'
   'htop'
   'httpie'
   'jq'
