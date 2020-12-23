@@ -1,12 +1,17 @@
 amazonlinux:2
+
 centos:7
 centos:8
+
 openjdk:8
+
 alpine:3
 debian:10
+archlinux:latest
 
 ubuntu:bionic
 ubuntu:eoan
+ubuntu:focal
 
 python:2-alpine
 python:2.7-alpine
@@ -21,16 +26,19 @@ python:3-alpine
 python:3.6-alpine
 python:3.7-alpine
 python:3.8-alpine
+python:3.9-alpine
 
 python:3-slim
 python:3.6-slim
 python:3.7-slim
 python:3.8-slim
+python:3.9-slim
 
 python:3-stretch
 python:3.6-stretch
 python:3.7-stretch
 python:3.8-stretch
+python:3.9-stretch
 
 golang:1-buster
 mvdan/shfmt:latest
