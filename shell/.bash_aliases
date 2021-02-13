@@ -146,3 +146,8 @@ fi
 # Shutdown/restart/etc
 safe_alias restart 'sudo shutdown -r now'
 safe_alias sd 'sudo shutdown -h now'
+
+# Random
+if [[ -x "$(command -v openssl)" ]]; then
+    safe_alias rh 'openssl rand -hex'
+fi
