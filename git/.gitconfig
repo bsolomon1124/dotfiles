@@ -5,25 +5,28 @@
     name = Brad Solomon
     email = bsolomon@protonmail.com
 [alias]
-    b           = branch
+    b           = branch -l
+    bl          = branch -l
+    ba          = branch -a
     l           = log
     sg          = log --oneline --graph --date=short
-    lr          = log --format='%h %Cgreen %ad %Creset %s' --no-merges --date='format:%b %d: %H:%M %z'
     sgs         = sg -n 15
+    lr          = log --format='%h %Cgreen %ad %Creset %s' --no-merges --date='format:%b %d: %H:%M %z'
+    contribs    = shortlog --summary --numbered
     a           = add
-    ci          = commit
+    aa          = add .
+    c           = commit
+    ca          = commit -a
+    cm          = commit -m
     cam         = commit -a -m
     d           = diff
     s           = status
-    st          = status
     sb          = status -sb
     sincetag    = "!f() { git log $(git describe --tags --abbrev=0)..HEAD; }; f"
     nuke        = "!f() { git branch -D \"$1\" && git push origin --delete \"$1\"; }; f"
-    tags        = tag -l
-    bs          = branch -a
+    t           = tag -l
     rv          = remote -v
     aliases     = config --get-regexp alias
-    contribs    = shortlog --summary --numbered
 [core]
     editor = subl -w
     excludesfile = ~/.gitignore_global
@@ -48,3 +51,6 @@
 [credential]
     # chmod 600 ~/.git-credentials over HTTPS
     helper = store
+[http]
+    postBuffer = 524288000
+    version = HTTP/1.1
