@@ -3,7 +3,7 @@
 # See also the 'FILES' section of 'git help config'
 [user]
     name = Brad Solomon
-    email = bsolomon@protonmail.com
+    email = brsolomon@deloitte.com
 [alias]
     b           = branch -l
     bl          = branch -l
@@ -54,3 +54,4 @@
 [http]
     postBuffer = 524288000
     version = HTTP/1.1
+    sslverify = false
