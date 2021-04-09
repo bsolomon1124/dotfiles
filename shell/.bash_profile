@@ -68,6 +68,15 @@ fi
 source "${CONFIG_PATH}/shell/environ"
 source "${CONFIG_PATH}/shell/.bash_aliases"
 
+# bash-completion from homebrew for bash, docker, etc
+if [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]]; then
+    . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+fi
+
+if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
+    . "$(brew --prefix)/etc/bash_completion"
+fi
+
 # Bash prompt - looks like `user ~/path/to/directory git:branchname`
 if [[ "$(type -t '__git_ps1')" == 'function' ]]; then
     PS1='\n\[\033[36m\]\u \[\033[34m\]\w\[\033[35m\]$(__git_ps1 " -> %s")\[\033[96m\]\n\$\[\033[0m\] '
