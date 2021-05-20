@@ -3,7 +3,6 @@
 # See also the 'FILES' section of 'git help config'
 [user]
     name = Brad Solomon
-    email = brsolomon@deloitte.com
 [alias]
     b           = branch -l
     bl          = branch -l
@@ -48,10 +47,9 @@
     oldHighlight = red bold 52
     newNormal = green bold
     newHighlight = green bold 22
-[credential]
-    # chmod 600 ~/.git-credentials over HTTPS
-    helper = store
 [http]
     postBuffer = 524288000
     version = HTTP/1.1
     sslverify = false
+[push]
+    default = simple
