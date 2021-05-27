@@ -55,7 +55,11 @@ grab_git_completion_script "git-completion.bash" && source ~/.git-completion.bas
 # in which case it will not be under ~ and we do *not* need
 # to manipulate path or PYENV_ROOT
 if [[ -x "$(command -v pyenv)" ]]; then
-    eval "$(pyenv init -)"
+    if [[ "$(pyenv --version)" =~ ^.*\ 2.* ]]; then
+        eval "$(pyenv init --path)"
+    else
+        eval "$(pyenv init -)"
+    fi
     if [[ -x "$(command -v pyenv-virtualenv-init)" ]]; then
         eval "$(pyenv virtualenv-init -)"
     fi
