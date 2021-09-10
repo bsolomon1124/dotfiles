@@ -7,7 +7,7 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # System-wide .bashrc file for interactive bash(1) shells.
 if [ -f /etc/bashrc ]; then
-      source /etc/bashrc
+    source /etc/bashrc
 fi
 
 if [[ ! -f "${HOME}/.CONFIG_PATH" ]]; then
