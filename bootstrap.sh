@@ -8,23 +8,36 @@ prompt_yesno() {
     esac
 }
 
+clear
+echo
+echo    '--- --- --- MacOS environment bootstrap --- --- ---'
+echo
+echo -e "\033[1mWARNING\033[0m: this script will overwrite files"
+echo    "such as ~/.bash_profile and ~/.gitignore."
+echo
+echo    "Confirm each action carefully."
 echo
 
 CONFIG_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-echo "Confirm location of dotfiles directory:"
+echo "Confirm dotfiles directory location (source of this script):"
 echo "    $CONFIG_PATH"
+echo
 if ! prompt_yesno "Continue?"; then
     echo "Exiting" && exit 1
 fi
 echo
 
 echo "$CONFIG_PATH" > "${CONFIG_PATH}/.CONFIG_PATH"
-echo "Wrote CONFIG_PATH '$CONFIG_PATH' to ${CONFIG_PATH}/.CONFIG_PATH"
+echo -e "\033[1mWrote\033[0m CONFIG_PATH marker:"
+echo    "    src: $CONFIG_PATH"
+echo    "    dest: ${CONFIG_PATH}/.CONFIG_PATH"
+echo
 ln -svf "${CONFIG_PATH}/.CONFIG_PATH" "${HOME}/.CONFIG_PATH"
 echo
 
 for fname in bash_profile bashrc; do
     if [[ -f "${HOME}/.${fname}" ]]; then
+        echo -e "\e[0;91mWarning\033[0m: Target ~/.${fname} exists"
         if ! prompt_yesno "Overwrite ~/.${fname}?"; then
             echo "Skipping overwrite of ~/.${fname}"
         else
@@ -37,10 +50,9 @@ for fname in bash_profile bashrc; do
     echo
 done
 
-
-
 if prompt_yesno "Symlink Git configuration?"; then
     if [[ -f "${HOME}/.gitconfig" ]]; then
+        echo -e "\e[0;91mWarning\033[0m: Target ${CONFIG_PATH}/git/.gitconfig exists"
         if prompt_yesno 'Overwrite ~/.gitconfig?'; then
             ln -vfs "${CONFIG_PATH}/git/.gitignore_global" "${HOME}/.gitignore_global"
             ln -vfs "${CONFIG_PATH}/git/.gitconfig" "${HOME}/.gitconfig"
