@@ -23,17 +23,21 @@ echo "Wrote CONFIG_PATH '$CONFIG_PATH' to ${CONFIG_PATH}/.CONFIG_PATH"
 ln -svf "${CONFIG_PATH}/.CONFIG_PATH" "${HOME}/.CONFIG_PATH"
 echo
 
-if [[ -f "${HOME}/.bash_profile" ]]; then
-    if ! prompt_yesno 'Overwrite ~/.bash_profile?'; then
-        "Skipping overwrite of ~/.bash_profile"
+for fname in bash_profile bashrc; do
+    if [[ -f "${HOME}/.${fname}" ]]; then
+        if ! prompt_yesno "Overwrite ~/.${fname}?"; then
+            echo "Skipping overwrite of ~/.${fname}"
+        else
+            ln -vfs "${CONFIG_PATH}/shell/.${fname}" "${HOME}/.${fname}"
+        fi
     else
-        ln -vfs "${CONFIG_PATH}/shell/.bash_profile" "${HOME}/.bash_profile"
+        ln -vfs "${CONFIG_PATH}/shell/.${fname}" "${HOME}/.${fname}"
+        echo "Symlinked to new location ~/.${fname}"
     fi
-else
-    ln -vfs "${CONFIG_PATH}/shell/.bash_profile" "${HOME}/.bash_profile"
-fi
+    echo
+done
 
-echo
+
 
 if prompt_yesno "Symlink Git configuration?"; then
     if [[ -f "${HOME}/.gitconfig" ]]; then

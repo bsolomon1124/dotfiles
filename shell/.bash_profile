@@ -47,23 +47,15 @@ function grab_git_completion_script()
     fi
 }
 
+if [[ -x "$(command -v pyenv)" ]]; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init --path)"
+    if [ -n "$PS1" -a -n "$BASH_VERSION" ]; then source ~/.bashrc; fi
+fi
+
 grab_git_completion_script "git-prompt.sh" && source ~/.git-prompt.sh
 grab_git_completion_script "git-completion.bash" && source ~/.git-completion.bash
-
-# Pyenv: https://github.com/pyenv/pyenv#basic-github-checkout
-# Need to account for if pyenv was installed through brew,
-# in which case it will not be under ~ and we do *not* need
-# to manipulate path or PYENV_ROOT
-if [[ -x "$(command -v pyenv)" ]]; then
-    eval "$(pyenv init -)"
-    if [[ -x "$(command -v pyenv-virtualenv-init)" ]]; then
-        eval "$(pyenv virtualenv-init -)"
-    fi
-    if [[ -d "$HOME/.pyenv/bin" ]]; then
-        export PATH="$HOME/.pyenv/bin:$PATH"
-        export PYENV_ROOT="$HOME/.pyenv"
-    fi
-fi
 
 source "${CONFIG_PATH}/shell/environ"
 source "${CONFIG_PATH}/shell/.bash_aliases"
