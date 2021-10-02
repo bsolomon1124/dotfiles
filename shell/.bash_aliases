@@ -24,6 +24,8 @@ safe_alias cp 'cp -i'
 safe_alias mv 'mv -i'
 safe_alias mkdir 'mkdir -p'
 
+# Use ANSI color sequences to distinguish file types
+CLICOLOR=1
 # `ls` aliases; GNU ls supports --color, with -G equivalent on MacOS/BSD
 if ls --color > /dev/null 2>&1; then
     colorflag='--color'
