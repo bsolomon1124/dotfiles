@@ -127,13 +127,6 @@ safe_alias hist "history"
 safe_alias cx "chmod a+x"
 safe_alias ca "chmod a+rwx"
 
-is_py2=$(python -c 'import sys; print("%i" % (sys.hexversion<0x03000000))')
-if [[ $is_py2 -eq 0 ]]; then
-    safe_alias json 'python -m json.tool'
-else
-    safe_alias json 'python -m json.tool --sort-keys'
-fi
-
 safe_alias unwrap 'less -S'
 safe_alias nowrap 'less -S'
 

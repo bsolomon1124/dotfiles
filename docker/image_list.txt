@@ -19,8 +19,8 @@ python:2.7-alpine
 python:2-slim
 python:2.7-slim
 
-python:2-stretch
-python:2.7-stretch
+python:2
+python:2.7
 
 python:3-alpine
 python:3.6-alpine
@@ -34,11 +34,10 @@ python:3.7-slim
 python:3.8-slim
 python:3.9-slim
 
-python:3-stretch
-python:3.6-stretch
-python:3.7-stretch
-python:3.8-stretch
-python:3.9-stretch
+python:3
+python:3.6
+python:3.7
+python:3.8
+python:3.9
 
 golang:1-buster
-mvdan/shfmt:latest

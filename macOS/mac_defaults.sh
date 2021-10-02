@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-# Ask for the administrator password upfront
+# defaults -- access the Mac OS X user defaults system
+
+# Ask for the administrator password upfront, cache credentials
 sudo -v
 
 # Close any open System Preferences panes, to prevent them from overriding
@@ -45,6 +47,9 @@ defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 # Screenshots
 # -----------------------------------------------------------------------------
 echo 'Set default: save screenshots to ~/Pictures/Screenshots'
+if [[ ! -d "${HOME}/Pictures/Screenshots" ]]; then
+    mkdir -p "${HOME}/Pictures/Screenshots"
+fi
 defaults write com.apple.screencapture location -string "${HOME}/Pictures/Screenshots"
 
 echo 'Set default: disable shadow in screenshots'
@@ -69,10 +74,11 @@ echo 'Set default: show battery percentage'
 defaults write com.apple.menuextra.battery ShowPercent -string 'YES'
 
 echo 'Set default: show icons for hard drives, servers, and removable media on the desktop'
-defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
-defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
 
 echo 'Set default: only use UTF-8 in Terminal.app'
 defaults write com.apple.terminal StringEncodings -array 4
@@ -83,7 +89,7 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 echo 'Set default: reveal additional info when clicking clock in login window'
 # Reveal IP address, hostname, OS version, etc. when clicking the clock
 # in the login window
-sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+defaults write com.apple.loginwindow AdminHostInfo HostName
 
 echo 'Set default: timezone == America/New_York'
 sudo systemsetup -settimezone "America/New_York" > /dev/null
