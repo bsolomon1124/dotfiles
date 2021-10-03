@@ -56,9 +56,17 @@ if prompt_yesno "Symlink Git configuration?"; then
         if prompt_yesno 'Overwrite ~/.gitconfig?'; then
             ln -vfs "${CONFIG_PATH}/git/.gitignore_global" "${HOME}/.gitignore_global"
             ln -vfs "${CONFIG_PATH}/git/.gitconfig" "${HOME}/.gitconfig"
+            echo
+            default_name="$(id -F)"
+            read -r -p "Git global user.name (default '$default_name'): " GIT_CONFIG_USER_NAME
+            read -r -p "Git global user.email: " GIT_CONFIG_USER_EMAIL
+            set -x
+            git config --global user.name "$GIT_CONFIG_USER_NAME"
+            git config --global user.email "$GIT_CONFIG_USER_EMAIL"
+            set +x
         fi
     fi
 fi
 
-ln -vs "${CONFIG_PATH}/.screenrc" "${HOME}/.screenrc"
-ln -vs "${CONFIG_PATH}/db/.sqliterc" "${HOME}/.sqliterc"
+ln -vfs "${CONFIG_PATH}/.screenrc" "${HOME}/.screenrc"
+ln -vfs "${CONFIG_PATH}/db/.sqliterc" "${HOME}/.sqliterc"

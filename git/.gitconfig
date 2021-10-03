@@ -1,9 +1,6 @@
 # Git configuration
 # Place at ~/.gitconfig for global config
 # See also the 'FILES' section of 'git help config'
-[user]
-	name = Brad Solomon
-	email = bsolomon@protonmail.com
 [alias]
     b           = branch -l
     bl          = branch -l
