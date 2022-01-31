@@ -79,6 +79,10 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 # Turn off cowsay Ansible output
 export ANSIBLE_NOCOWS=1
 
+if [[ -x "$(command -v gpg)" ]]; then
+    export GPG_TTY="$(tty)"
+fi
+
 # Shell options
 # https://www.gnu.org/software/bash/manual/html_node/The-Shopt-Builtin.html
 shopt -s checkwinsize
