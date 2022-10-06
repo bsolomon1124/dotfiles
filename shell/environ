@@ -37,6 +37,7 @@ fi
 if [[ "$(uname)" -eq "Darwin" ]]; then
     export PATH="/usr/local/sbin:${HOME}/bin:${PATH}"
 fi
+export PATH="${PATH}:${HOME}/.local/bin"
 
 # LESS man page colors (makes Man pages more readable)
 export LESS_TERMCAP_mb=$'\E[01;31m'
