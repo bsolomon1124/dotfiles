@@ -60,13 +60,15 @@ grab_git_completion_script "git-completion.bash" && source ~/.git-completion.bas
 source "${CONFIG_PATH}/shell/environ"
 source "${CONFIG_PATH}/shell/.bash_aliases"
 
+_BREW_REFIX="$(brew --prefix)"
+
 # bash-completion from homebrew for bash, docker, etc
-if [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]]; then
-    . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+if [[ -r "${_BREW_REFIX}/etc/profile.d/bash_completion.sh" ]]; then
+    . "${_BREW_REFIX}/etc/profile.d/bash_completion.sh"
 fi
 
-if [ -f "$(brew --prefix)/etc/bash_completion" ]; then
-    . "$(brew --prefix)/etc/bash_completion"
+if [ -f "${_BREW_REFIX}/etc/bash_completion" ]; then
+    . "${_BREW_REFIX}/etc/bash_completion"
 fi
 
 # Bash prompt - looks like `user ~/path/to/directory git:branchname`

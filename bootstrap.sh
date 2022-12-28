@@ -35,7 +35,7 @@ echo
 ln -svf "${CONFIG_PATH}/.CONFIG_PATH" "${HOME}/.CONFIG_PATH"
 echo
 
-for fname in bash_profile bashrc; do
+for fname in bash_profile bashrc hushlogin; do
     if [[ -f "${HOME}/.${fname}" ]]; then
         echo -e "\e[0;91mWarning\033[0m: Target ~/.${fname} exists"
         if ! prompt_yesno "Overwrite ~/.${fname}?"; then
