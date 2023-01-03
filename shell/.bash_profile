@@ -78,3 +78,9 @@ else
     PS1='\n\[\033[36m\]\u \[\033[34m\]\w\[\033[96m\]\n\$\[\033[0m\] '
 fi
 export PS1
+
+if [ -e "${HOME}/.iterm2_shell_integration.bash" ]; then
+    source "${HOME}/.iterm2_shell_integration.bash"
+else
+    curl -fsSL https://iterm2.com/shell_integration/install_shell_integration.sh | bash
+fi
