@@ -84,3 +84,10 @@ if [ -e "${HOME}/.iterm2_shell_integration.bash" ]; then
 else
     curl -fsSL https://iterm2.com/shell_integration/install_shell_integration.sh | bash
 fi
+
+# Docker Desktop
+if [[ -d /Applications/Docker.app ]]; then
+    if [[ -f "${HOME}/.docker/init-bash.sh" ]]; then
+        source "${HOME}/.docker/init-bash.sh" || true
+    fi
+fi

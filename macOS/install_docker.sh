@@ -27,4 +27,4 @@ for i in \
     fi
 done
 find /usr -iregex '.*bash_completion.d/docker-compose' -type f -print -delete 2>/dev/null || true
-brew install -v homebrew/cask/docker
+brew install -v --cask docker
