@@ -73,9 +73,9 @@ fi
 
 # Bash prompt - looks like `user ~/path/to/directory git:branchname`
 if [[ "$(type -t '__git_ps1')" == 'function' ]]; then
-    PS1='\n\[\033[36m\]\u \[\033[34m\]\w\[\033[35m\]$(__git_ps1 " -> %s")\[\033[96m\]\n\$\[\033[0m\] '
+    PS1='\n\[\033[36m\] \[\033[90m\]\w\[\033[35m\]$(__git_ps1 " -> %s")\[\033[96m\]\n\$\[\033[0m\] '
 else
-    PS1='\n\[\033[36m\]\u \[\033[34m\]\w\[\033[96m\]\n\$\[\033[0m\] '
+    PS1='\n\[\033[36m\] \[\033[90m\]\w\[\033[96m\]\n\$\[\033[0m\] '
 fi
 export PS1
 
