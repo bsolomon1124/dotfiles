@@ -18,6 +18,12 @@ echo
 echo    "Confirm each action carefully."
 echo
 
+if [[ ! -f /var/db/locate.database ]]; then
+    if prompt_yesno "Update locate database (/var/db/locate.database)?"; then
+        sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
+    fi
+fi
+
 CONFIG_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 echo "Confirm dotfiles directory location (source of this script):"
 echo "    $CONFIG_PATH"
@@ -38,10 +44,22 @@ echo
 enable -n command
 pushd "${CONFIG_PATH}/macOS" || exit 1
 if [[ ! -x "$(command -v brew)" ]]; then
-    /usr/bin/env bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    if prompt_yesno "Install homebrew?"; then
+        /usr/bin/env bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    fi
 fi
-HOMEBREW_NO_ENV_HINTS=1 brew bundle --verbose
+if prompt_yesno "Install packages with homebrew?"; then
+    HOMEBREW_NO_ENV_HINTS=1 brew bundle --verbose
+fi
 popd
+
+if [[ -x "$(command -v brew)" ]]; then
+    echo "Adding homebrew bash as default shell"
+    if ! grep -q -F "$(brew --prefix)/bin/bash" /etc/shells; then
+        sudo sh -c "echo $(brew --prefix)/bin/bash >> /etc/shells"
+    fi
+    chsh -s "$(brew --prefix)/bin/bash"
+fi
 
 for fname in bash_profile bashrc hushlogin; do
     if [[ -f "${HOME}/.${fname}" ]]; then

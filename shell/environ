@@ -14,8 +14,11 @@ export LANG='en_US.UTF-8'
 export LANG_ALL='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
 
-# Set Sublime Text as editor
+# Make subl command available and set Sublime Text as editor
 # https://www.sublimetext.com/docs/3/osx_command_line.html
+if [[ -d "/Applications/Sublime Text.app/Contents/SharedSupport/bin" ]]; then
+    export PATH="${PATH}:/Applications/Sublime Text.app/Contents/SharedSupport/bin"
+fi
 if [[ -x "$(command -v subl)" ]]; then
     export EDITOR='subl -w'
 else
