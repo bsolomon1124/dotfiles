@@ -29,6 +29,10 @@ if [[ ! -d "$CONFIG_PATH" ]]; then
     exit 1
 fi
 
+if [[ -x "$(command -v brew)" ]]; then
+    export PATH="${PATH}:$(brew --prefix)/opt/openssl/bin"
+fi
+
 function grab_git_completion_script()
 {
     local scriptname="$1"
