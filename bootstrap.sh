@@ -51,14 +51,16 @@ fi
 if prompt_yesno "Install packages with homebrew?"; then
     HOMEBREW_NO_ENV_HINTS=1 brew bundle --verbose
 fi
-popd
+popd || exit
 
 if [[ -x "$(command -v brew)" ]]; then
-    echo "Adding homebrew bash as default shell"
-    if ! grep -q -F "$(brew --prefix)/bin/bash" /etc/shells; then
-        sudo sh -c "echo $(brew --prefix)/bin/bash >> /etc/shells"
+    if [ "$SHELL" != "$(brew --prefix)/bin/bash" ]; then
+        echo "Adding homebrew bash as default shell"
+        if ! grep -q -F "$(brew --prefix)/bin/bash" /etc/shells; then
+            sudo sh -c "echo $(brew --prefix)/bin/bash >> /etc/shells"
+        fi
+        chsh -s "$(brew --prefix)/bin/bash"
     fi
-    chsh -s "$(brew --prefix)/bin/bash"
 fi
 
 for fname in bash_profile bashrc hushlogin; do
