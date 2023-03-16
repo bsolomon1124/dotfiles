@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
 # defaults -- access the Mac OS X user defaults system
+# https://ss64.com/osx/defaults.html
+# https://ss64.com/osx/syntax-defaults.html
 
-# Ask for the administrator password upfront, cache credentials
-sudo -v
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
 
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
@@ -17,9 +21,14 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
 echo 'Set default: show hidden files'
 defaults write com.apple.Finder AppleShowAllFiles -bool true
+defaults write com.apple.finder AppleShowAllFiles TRUE
+killall Finder
 
 echo 'Set default: disable the warning when changing a file extension'
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+echo 'Save to disk (not to iCloud) by default'
+defaults write -g NSDocumentSaveNewDocumentsToCloud -bool false
 
 # -----------------------------------------------------------------------------
 # Finder
@@ -83,7 +92,7 @@ defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
 echo 'Set default: only use UTF-8 in Terminal.app'
 defaults write com.apple.terminal StringEncodings -array 4
 
-echo 'Set default: disable the “Are you sure you want to open this application?” dialog'
+echo 'Set default: disable the "Are you sure you want to open this application?"" dialog'
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 echo 'Set default: reveal additional info when clicking clock in login window'
@@ -93,3 +102,10 @@ defaults write com.apple.loginwindow AdminHostInfo HostName
 
 echo 'Set default: timezone == America/New_York'
 sudo systemsetup -settimezone "America/New_York" > /dev/null
+
+echo 'Disable the macOS Crash reporter (Crash dialog that normally appears after an application halts)'
+defaults write com.apple.CrashReporter DialogType none
+
+echo 'Disable Bouncing dock icons'
+defaults write com.apple.dock no-bouncing -bool True
+killall Dock
