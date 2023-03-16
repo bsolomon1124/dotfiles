@@ -35,6 +35,14 @@ echo
 ln -svf "${CONFIG_PATH}/.CONFIG_PATH" "${HOME}/.CONFIG_PATH"
 echo
 
+enable -n command
+pushd "${CONFIG_PATH}/macOS" || exit 1
+if [[ ! -x "$(command -v brew)" ]]; then
+    /usr/bin/env bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+HOMEBREW_NO_ENV_HINTS=1 brew bundle --verbose
+popd
+
 for fname in bash_profile bashrc hushlogin; do
     if [[ -f "${HOME}/.${fname}" ]]; then
         echo -e "\e[0;91mWarning\033[0m: Target ~/.${fname} exists"
