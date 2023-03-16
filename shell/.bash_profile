@@ -30,7 +30,7 @@ if [[ ! -d "$CONFIG_PATH" ]]; then
 fi
 
 if [[ -x "$(command -v brew)" ]]; then
-    export PATH="${PATH}:$(brew --prefix)/opt/openssl/bin"
+    export PATH="$(brew --prefix)/opt/openssl/bin:${PATH}"
 fi
 
 function grab_git_completion_script()
