@@ -85,13 +85,19 @@ if prompt_yesno "Symlink Git configuration?"; then
             ln -vfs "${CONFIG_PATH}/git/.gitignore_global" "${HOME}/.gitignore_global"
             ln -vfs "${CONFIG_PATH}/git/.gitconfig" "${HOME}/.gitconfig"
             echo
-            default_name="$(id -F)"
-            read -r -p "Git global user.name (default '$default_name'): " GIT_CONFIG_USER_NAME
-            read -r -p "Git global user.email: " GIT_CONFIG_USER_EMAIL
-            set -x
-            git config --global user.name "$GIT_CONFIG_USER_NAME"
-            git config --global user.email "$GIT_CONFIG_USER_EMAIL"
-            set +x
+            if ! git config --global --get user.email > /dev/null; then
+                read -r -p "Git global user.email: " GIT_CONFIG_USER_EMAIL
+                set -x
+                git config --global user.email "$GIT_CONFIG_USER_EMAIL"
+                set +x
+            fi
+            if ! git config --global --get user.name> /dev/null; then
+                default_name="$(id -F)"
+                read -r -p "Git global user.name (default '$default_name'): " GIT_CONFIG_USER_NAME
+                set -x
+                git config --global user.name "$GIT_CONFIG_USER_NAME"
+                set +x
+            fi
         fi
     fi
 fi
