@@ -51,3 +51,6 @@
 [push]
     default = simple
     autoSetupRemote = true
+[user]
+	name = Brad Solomon
+	email = 81818815+brsolomon-deloitte@users.noreply.github.com

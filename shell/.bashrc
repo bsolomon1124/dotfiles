@@ -10,3 +10,5 @@ if [[ -d /Applications/Docker.app ]]; then
         source "${HOME}/.docker/init-bash.sh" || true
     fi
 fi
+
+source /Users/brsolomon/.docker/init-bash.sh || true # Added by Docker Desktop
