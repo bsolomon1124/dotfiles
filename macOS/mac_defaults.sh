@@ -101,7 +101,7 @@ echo 'Set default: reveal additional info when clicking clock in login window'
 defaults write com.apple.loginwindow AdminHostInfo HostName
 
 echo 'Set default: timezone == America/New_York'
-sudo systemsetup -settimezone "America/New_York" > /dev/null
+systemsetup -settimezone "America/New_York" 2> /dev/null
 
 echo 'Disable the macOS Crash reporter (Crash dialog that normally appears after an application halts)'
 defaults write com.apple.CrashReporter DialogType none
