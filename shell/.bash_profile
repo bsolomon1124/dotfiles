@@ -30,7 +30,8 @@ if [[ ! -d "$CONFIG_PATH" ]]; then
 fi
 
 if [[ -x "$(command -v brew)" ]]; then
-    export PATH="$(brew --prefix)/opt/openssl/bin:${PATH}"
+    _BREW_PREFIX="$(brew --prefix)"
+    export PATH="${_BREW_PREFIX}/opt/openssl/bin:${PATH}"
 fi
 
 function grab_git_completion_script()
@@ -64,15 +65,13 @@ grab_git_completion_script "git-completion.bash" && source ~/.git-completion.bas
 source "${CONFIG_PATH}/shell/environ"
 source "${CONFIG_PATH}/shell/.bash_aliases"
 
-_BREW_REFIX="$(brew --prefix)"
-
 # bash-completion from homebrew for bash, docker, etc
-if [[ -r "${_BREW_REFIX}/etc/profile.d/bash_completion.sh" ]]; then
-    . "${_BREW_REFIX}/etc/profile.d/bash_completion.sh"
+if [[ -r "${_BREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+    . "${_BREW_PREFIX}/etc/profile.d/bash_completion.sh"
 fi
 
-if [ -f "${_BREW_REFIX}/etc/bash_completion" ]; then
-    . "${_BREW_REFIX}/etc/bash_completion"
+if [ -f "${_BREW_PREFIX}/etc/bash_completion" ]; then
+    . "${_BREW_PREFIX}/etc/bash_completion"
 fi
 
 # Bash prompt - looks like `user ~/path/to/directory git:branchname`
