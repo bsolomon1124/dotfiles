@@ -26,6 +26,11 @@ else
     export EDITOR='vim'
 fi
 
+# VSCode 'code' command
+if [[ -d '/Applications/Visual Studio Code.app/Contents/Resources/app/bin' ]]; then
+    export PATH="${PATH}:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+fi
+
 # A brief 'how is my PATH obtained on macOS?' primer:
 #
 # - Default PATH values are obtained from /etc/paths

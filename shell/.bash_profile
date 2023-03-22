@@ -18,7 +18,7 @@ fi
 # Disable builtin 'command', which does not show the full path
 enable -n command
 
-CONFIG_PATH=$(<.CONFIG_PATH)
+CONFIG_PATH=$(<${HOME}/.CONFIG_PATH)
 if [[ -z "$CONFIG_PATH" ]]; then
     echo "CONFIG_PATH empty; exiting" >&2
     exit 1

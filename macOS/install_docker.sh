@@ -26,5 +26,5 @@ for i in \
         brew remove "$i"
     fi
 done
-find /usr -iregex '.*bash_completion.d/docker-compose' -type f -print -delete 2>/dev/null || true
+sudo find /usr "$(dirname $(brew --prefix))" -iregex '.*bash_completion.d/docker-compose' -type f -print -delete 2>/dev/null || true
 brew install -v --cask docker
