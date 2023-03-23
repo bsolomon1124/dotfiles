@@ -4,14 +4,10 @@
 # https://ss64.com/osx/defaults.html
 # https://ss64.com/osx/syntax-defaults.html
 
-if [ "$EUID" -ne 0 ]
-  then echo "Please run as root"
-  exit
-fi
-
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
+osascript -e 'tell application "Finder" to quit' || killall Finder || true
 
 # -----------------------------------------------------------------------------
 # Files
@@ -22,7 +18,6 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 echo 'Set default: show hidden files'
 defaults write com.apple.Finder AppleShowAllFiles -bool true
 defaults write com.apple.finder AppleShowAllFiles TRUE
-killall Finder
 
 echo 'Set default: disable the warning when changing a file extension'
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
@@ -76,6 +71,8 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 # -----------------------------------------------------------------------------
 # Other
 # -----------------------------------------------------------------------------
+
+osascript -e 'tell application "Dock" to quit' || killall Dock || true
 echo 'Set default: autohide the dock'
 defaults write com.apple.dock autohide -bool true
 
@@ -100,12 +97,13 @@ echo 'Set default: reveal additional info when clicking clock in login window'
 # in the login window
 defaults write com.apple.loginwindow AdminHostInfo HostName
 
-echo 'Set default: timezone == America/New_York'
-systemsetup -settimezone "America/New_York" 2> /dev/null
-
 echo 'Disable the macOS Crash reporter (Crash dialog that normally appears after an application halts)'
 defaults write com.apple.CrashReporter DialogType none
 
 echo 'Disable Bouncing dock icons'
 defaults write com.apple.dock no-bouncing -bool True
-killall Dock
+
+# Restart
+sleep 2
+osascript -e 'tell application "Finder" to activate'
+osascript -e 'launch application "Dock"'
