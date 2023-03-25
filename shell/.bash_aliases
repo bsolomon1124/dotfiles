@@ -72,6 +72,10 @@ safe_alias grep 'grep --color=auto'
 # See separate .gitconfig for git subcommand aliases.
 safe_alias g "git"
 
+if [[ -x "$(command -v terraform)" ]]; then
+    safe_alias tf terraform
+fi
+
 # Python-related aliases
 command -v tree > /dev/null \
     && safe_alias pytree 'tree -P "*.py" -F --prune'
