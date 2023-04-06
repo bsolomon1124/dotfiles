@@ -74,6 +74,11 @@ if [ -f "${_BREW_PREFIX}/etc/bash_completion" ]; then
     . "${_BREW_PREFIX}/etc/bash_completion"
 fi
 
+# bash-completion for terraform
+if [[ -x "${_BREW_PREFIX}/bin/terraform" ]]; then
+    complete -C "${_BREW_PREFIX}/bin/terraform" terraform
+fi
+
 # Bash prompt - looks like `user ~/path/to/directory git:branchname`
 if [[ "$(type -t '__git_ps1')" == 'function' ]]; then
     PS1='\n\[\033[36m\] \[\033[90m\]\w\[\033[35m\]$(__git_ps1 " -> %s")\[\033[96m\]\n\$\[\033[0m\] '
