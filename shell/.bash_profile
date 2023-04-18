@@ -99,3 +99,10 @@ if [[ -d /Applications/Docker.app ]]; then
         source "${HOME}/.docker/init-bash.sh" || true
     fi
 fi
+
+# Docker CLI user-bin installation
+# https://docs.docker.com/desktop/settings/mac/#advanced
+
+if [[ -d "${HOME}/.docker/bin" ]]; then
+    export PATH="${HOME}/.docker/bin:${PATH}"
+fi

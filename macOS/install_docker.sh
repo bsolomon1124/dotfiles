@@ -27,4 +27,16 @@ for i in \
     fi
 done
 sudo find /usr "$(dirname $(brew --prefix))" -iregex '.*bash_completion.d/docker-compose' -type f -print -delete 2>/dev/null || true
+
+# Docker CLI user-bin installation
+# https://docs.docker.com/desktop/settings/mac/#advanced
+
+if [[ ! -d "${HOME}/.docker" ]]; then
+    mkdir "${HOME}/.docker"
+fi
+
+if [[ ! -d "${HOME}/.docker/bin" ]]; then
+    mkdir "${HOME}/.docker/bin"
+fi
+
 brew install -v --cask docker
