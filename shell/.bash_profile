@@ -31,7 +31,7 @@ fi
 
 if [[ -x "$(command -v brew)" ]]; then
     _BREW_PREFIX="$(brew --prefix)"
-    export PATH="${_BREW_PREFIX}/opt/openssl/bin:${PATH}"
+    export PATH="${_BREW_PREFIX}/opt/openssl/bin:${_BREW_PREFIX}/sbin:${PATH}"
 fi
 
 function grab_git_completion_script()
