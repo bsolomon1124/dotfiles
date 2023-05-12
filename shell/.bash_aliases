@@ -63,7 +63,7 @@ if [[ -x "$(command -v locate)" ]]; then
     safe_alias loc 'locate'
 fi
 
-safe_alias pubip 'dig +short myip.opendns.com @resolver1.opendns.com 2> /dev/null || (curl ifconfig.me/ip && echo)'
+safe_alias pubip 'curl -fsSL ifconfig.me/ip && echo'
 
 safe_alias locip 'ipconfig getifaddr en0'
 
