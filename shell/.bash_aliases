@@ -115,6 +115,10 @@ if [[ -x "$(command -v docker)" ]]; then
     safe_alias docker_update_imgs 'docker system prune --force && docker image ls --format "{{.Repository}}:{{.Tag}}" | xargs -L1 docker image pull'
 fi
 
+if [[ -x "$(command -v kubectl)" ]]; then
+    safe_alias k 'kubectl'
+fi
+
 safe_alias bz2 'bzip2'
 safe_alias tarls 'tar --list --verbose --file'
 
