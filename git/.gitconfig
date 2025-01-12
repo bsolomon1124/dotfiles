@@ -25,7 +25,7 @@
     rv          = remote -v
     aliases     = config --get-regexp alias
 [core]
-    editor = subl -w
+    editor = code --wait
     excludesfile = ~/.gitignore_global
     pager = diff-so-fancy | less --tabs=4 -RFX
 [color]

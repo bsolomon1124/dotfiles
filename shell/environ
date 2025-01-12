@@ -14,21 +14,17 @@ export LANG='en_US.UTF-8'
 export LANG_ALL='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
 
-# Make subl command available and set Sublime Text as editor
-# https://www.sublimetext.com/docs/3/osx_command_line.html
-if [[ -d "/Applications/Sublime Text.app/Contents/SharedSupport/bin" ]]; then
-    export PATH="${PATH}:/Applications/Sublime Text.app/Contents/SharedSupport/bin"
-fi
-if [[ -x "$(command -v subl)" ]]; then
-    export EDITOR='subl -w'
-else
-    echo "WARNING: Could not find subl.  Setting editor to Vim" >&2
-    export EDITOR='vim'
-fi
-
+# Set VSCode as EDITOR
+# https://code.visualstudio.com/docs/editor/command-line
 # VSCode 'code' command
 if [[ -d '/Applications/Visual Studio Code.app/Contents/Resources/app/bin' ]]; then
     export PATH="${PATH}:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+fi
+if [[ -x "$(command -v code)" ]]; then
+    export EDITOR='code --wait'
+else
+    echo "WARNING: Could not find VSCode 'code' CLI.  Setting editor to Vim" >&2
+    export EDITOR='vim'
 fi
 
 # A brief 'how is my PATH obtained on macOS?' primer:
