@@ -1,43 +1,47 @@
-amazonlinux:2
+# Blank lines and lines starting with # are skipped by the README loop.
 
-centos:7
-centos:8
+# Amazon Linux (AL2 EOL 2026-06; AL2023 is current)
+amazonlinux:2023
 
-openjdk:8
+# RHEL-compatible rebuilds (CentOS Linux 7/8 are both EOL and discontinued)
+rockylinux:9
+almalinux:9
+
+# JDK (Docker Hub's official `openjdk` image is deprecated; Eclipse Temurin
+# is the recommended replacement. 17 and 21 are current LTS.)
+eclipse-temurin:17
+eclipse-temurin:21
 
 alpine:3
-debian:10
+debian:12
 archlinux:latest
 
-ubuntu:bionic
-ubuntu:eoan
-ubuntu:focal
+# Ubuntu LTS (bionic/eoan/focal are all past standard-support EOL)
+ubuntu:jammy
+ubuntu:noble
 
-python:2-alpine
-python:2.7-alpine
-
-python:2-slim
-python:2.7-slim
-
-python:2
-python:2.7
-
+# Python — drop 3.9 and earlier; 3.10 EOLs 2026-10, 3.14 is newest
 python:3-alpine
-python:3.6-alpine
-python:3.7-alpine
-python:3.8-alpine
-python:3.9-alpine
+python:3.10-alpine
+python:3.11-alpine
+python:3.12-alpine
+python:3.13-alpine
+python:3.14-alpine
 
 python:3-slim
-python:3.6-slim
-python:3.7-slim
-python:3.8-slim
-python:3.9-slim
+python:3.10-slim
+python:3.11-slim
+python:3.12-slim
+python:3.13-slim
+python:3.14-slim
 
 python:3
-python:3.6
-python:3.7
-python:3.8
-python:3.9
+python:3.10
+python:3.11
+python:3.12
+python:3.13
+python:3.14
 
-golang:1-buster
+# Go (buster is Debian 10, EOL; bookworm is current Debian stable)
+golang:1-bookworm
+golang:1-alpine

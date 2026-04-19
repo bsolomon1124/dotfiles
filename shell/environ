@@ -38,7 +38,7 @@ fi
 #       /sbin
 # - The internal `path_helper` utility then reads the contents of the
 #   files in /etc/paths.d and appends their contents to PATH
-if [[ "$(uname)" -eq "Darwin" ]]; then
+if [[ "$(uname)" == "Darwin" ]]; then
     export PATH="/usr/local/sbin:${HOME}/bin:${PATH}"
 fi
 export PATH="${PATH}:${HOME}/.local/bin"
@@ -56,9 +56,6 @@ if [[ -x "$(command -v bat)" ]]; then
     export BAT_THEME='Monokai Extended Light'
 fi
 
-# use git:// instead of https:// for git clone
-export USE_GIT_URI=1
-
 # Unstaged (*) and staged (+) changes will be shown next to the branch name
 # with __git_ps1
 export GIT_PS1_SHOWDIRTYSTATE=1
@@ -70,16 +67,21 @@ export GIT_PS1_SHOWUNTRACKEDFILES=1
 # Mimic --no-edit by default
 export GIT_MERGE_AUTOEDIT=no
 
-# Add the bin/ of this repo to PATH
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd | xargs dirname)"
-export PATH="${PATH}:${DIR}/bin"
+# Add the bin/ of this repo to PATH. Resolve this file's dir in a way
+# that works under both bash (BASH_SOURCE) and zsh (${(%):-%x}).
+if [[ -n "${BASH_SOURCE-}" ]]; then
+    _environ_self="${BASH_SOURCE[0]}"
+elif [[ -n "${ZSH_VERSION-}" ]]; then
+    _environ_self="${(%):-%x}"
+fi
+if [[ -n "${_environ_self-}" ]]; then
+    DIR="$(cd "$(dirname "$_environ_self")" >/dev/null 2>&1 && pwd | xargs dirname)"
+    export PATH="${PATH}:${DIR}/bin"
+fi
+unset _environ_self
 
 # Xterm with support for 256 colors enabled
 export TERM=xterm-256color
-
-# "pyenv-virtualenv: prompt changing will be removed from future release
-# configure `export PYENV_VIRTUALENV_DISABLE_PROMPT=1' to simulate the behavior."
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 # Turn off cowsay Ansible output
 export ANSIBLE_NOCOWS=1
@@ -89,15 +91,23 @@ if [[ -x "$(command -v gpg)" ]]; then
 fi
 
 # Shell options
-# https://www.gnu.org/software/bash/manual/html_node/The-Shopt-Builtin.html
-shopt -s checkwinsize
-shopt -s gnu_errfmt
-shopt -s interactive_comments
-shopt -s nocaseglob
-shopt -s promptvars
+if [[ -n "${BASH_VERSION-}" ]]; then
+    # https://www.gnu.org/software/bash/manual/html_node/The-Shopt-Builtin.html
+    shopt -s checkwinsize
+    shopt -s gnu_errfmt
+    shopt -s interactive_comments
+    shopt -s nocaseglob
+    shopt -s promptvars
+elif [[ -n "${ZSH_VERSION-}" ]]; then
+    # zsh equivalents
+    setopt CHECK_JOBS
+    setopt INTERACTIVE_COMMENTS
+    setopt NO_CASE_GLOB
+    setopt PROMPT_SUBST
+fi
 
 # Homebrew (see `man brew`)
-if [ "$(uname)" == "Darwin" ]; then
+if [[ "$(uname)" == "Darwin" ]]; then
     if [[ -x "$(command -v brew)" ]]; then
         if [[ -x "$(command -v bat)" ]]; then
             export HOMEBREW_BAT=1

@@ -13,7 +13,7 @@ echo
 echo    '--- --- --- MacOS environment bootstrap --- --- ---'
 echo
 echo -e "\033[1mWARNING\033[0m: this script will overwrite files"
-echo    "such as ~/.bash_profile and ~/.gitignore."
+echo    "such as ~/.zshrc, ~/.bash_profile, and ~/.gitconfig."
 echo
 echo    "Confirm each action carefully."
 echo
@@ -53,17 +53,7 @@ if prompt_yesno "Install packages with homebrew?"; then
 fi
 popd || exit
 
-if [[ -x "$(command -v brew)" ]]; then
-    if [ "$SHELL" != "$(brew --prefix)/bin/bash" ]; then
-        echo "Adding homebrew bash as default shell"
-        if ! grep -q -F "$(brew --prefix)/bin/bash" /etc/shells; then
-            sudo sh -c "echo $(brew --prefix)/bin/bash >> /etc/shells"
-        fi
-        chsh -s "$(brew --prefix)/bin/bash"
-    fi
-fi
-
-for fname in bash_profile bashrc hushlogin; do
+for fname in zshrc zprofile bash_profile bashrc hushlogin; do
     if [[ -f "${HOME}/.${fname}" ]]; then
         echo -e "\e[0;91mWarning\033[0m: Target ~/.${fname} exists"
         if ! prompt_yesno "Overwrite ~/.${fname}?"; then
@@ -79,28 +69,40 @@ for fname in bash_profile bashrc hushlogin; do
 done
 
 if prompt_yesno "Symlink Git configuration?"; then
+    do_git_symlink=1
     if [[ -f "${HOME}/.gitconfig" ]]; then
-        echo -e "\e[0;91mWarning\033[0m: Target ${CONFIG_PATH}/git/.gitconfig exists"
-        if prompt_yesno 'Overwrite ~/.gitconfig?'; then
-            ln -vfs "${CONFIG_PATH}/git/.gitignore_global" "${HOME}/.gitignore_global"
-            ln -vfs "${CONFIG_PATH}/git/.gitconfig" "${HOME}/.gitconfig"
-            echo
-            if ! git config --global --get user.email > /dev/null; then
-                read -r -p "Git global user.email: " GIT_CONFIG_USER_EMAIL
-                set -x
-                git config --global user.email "$GIT_CONFIG_USER_EMAIL"
-                set +x
-            fi
-            if ! git config --global --get user.name> /dev/null; then
-                default_name="$(id -F)"
-                read -r -p "Git global user.name (default '$default_name'): " GIT_CONFIG_USER_NAME
-                set -x
-                git config --global user.name "$GIT_CONFIG_USER_NAME"
-                set +x
-            fi
+        echo -e "\e[0;91mWarning\033[0m: ~/.gitconfig exists"
+        prompt_yesno 'Overwrite ~/.gitconfig?' || do_git_symlink=0
+    fi
+    if [[ $do_git_symlink -eq 1 ]]; then
+        ln -vfs "${CONFIG_PATH}/git/.gitignore_global" "${HOME}/.gitignore_global"
+        ln -vfs "${CONFIG_PATH}/git/.gitconfig" "${HOME}/.gitconfig"
+        echo
+        # Write identity to ~/.gitconfig.local (untracked, per-machine), not
+        # --global, because ~/.gitconfig is a symlink into this repo.
+        local_gitconfig="${HOME}/.gitconfig.local"
+        if ! git config --get user.email > /dev/null; then
+            read -r -p "Git user.email: " GIT_CONFIG_USER_EMAIL
+            set -x
+            git config --file "$local_gitconfig" user.email "$GIT_CONFIG_USER_EMAIL"
+            set +x
+        fi
+        if ! git config --get user.name > /dev/null; then
+            default_name="$(id -F)"
+            read -r -p "Git user.name (default '$default_name'): " GIT_CONFIG_USER_NAME
+            set -x
+            git config --file "$local_gitconfig" user.name "${GIT_CONFIG_USER_NAME:-$default_name}"
+            set +x
         fi
     fi
 fi
 
-ln -vfs "${CONFIG_PATH}/.screenrc" "${HOME}/.screenrc"
-ln -vfs "${CONFIG_PATH}/db/.sqliterc" "${HOME}/.sqliterc"
+for pair in ".screenrc:.screenrc" "db/.sqliterc:.sqliterc"; do
+    src="${pair%%:*}"
+    dst="${pair##*:}"
+    if [[ -f "${HOME}/${dst}" && ! -L "${HOME}/${dst}" ]]; then
+        echo -e "\e[0;91mWarning\033[0m: Target ~/${dst} exists and is not a symlink"
+        prompt_yesno "Overwrite ~/${dst}?" || continue
+    fi
+    ln -vfs "${CONFIG_PATH}/${src}" "${HOME}/${dst}"
+done
