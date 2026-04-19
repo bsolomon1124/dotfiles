@@ -52,18 +52,15 @@ function grab_git_completion_script()
     fi
 }
 
-if [[ -x "$(command -v pyenv)" ]]; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init --path)"
-    if [ -n "$PS1" -a -n "$BASH_VERSION" ]; then source ~/.bashrc; fi
+if [ -n "$PS1" ] && [ -n "$BASH_VERSION" ] && [ -f ~/.bashrc ]; then
+    source ~/.bashrc
 fi
 
 grab_git_completion_script "git-prompt.sh" && source ~/.git-prompt.sh
 grab_git_completion_script "git-completion.bash" && source ~/.git-completion.bash
 
 source "${CONFIG_PATH}/shell/environ"
-source "${CONFIG_PATH}/shell/.bash_aliases"
+source "${CONFIG_PATH}/shell/aliases"
 
 # bash-completion from homebrew for bash, docker, etc
 if [[ -r "${_BREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
@@ -89,8 +86,6 @@ export PS1
 
 if [ -e "${HOME}/.iterm2_shell_integration.bash" ]; then
     source "${HOME}/.iterm2_shell_integration.bash"
-else
-    curl -fsSL https://iterm2.com/shell_integration/install_shell_integration.sh | bash
 fi
 
 # Docker Desktop
@@ -106,3 +101,8 @@ fi
 if [[ -d "${HOME}/.docker/bin" ]]; then
     export PATH="${HOME}/.docker/bin:${PATH}"
 fi
+
+alias priv='/Applications/Privileges.app/Contents/MacOS/PrivilegesCLI'
+alias uuid4='python3 -c "import uuid; print(uuid.uuid4())"'
+
+

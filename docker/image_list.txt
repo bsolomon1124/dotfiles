@@ -13,31 +13,22 @@ ubuntu:bionic
 ubuntu:eoan
 ubuntu:focal
 
-python:2-alpine
-python:2.7-alpine
-
-python:2-slim
-python:2.7-slim
-
-python:2
-python:2.7
-
 python:3-alpine
-python:3.6-alpine
-python:3.7-alpine
-python:3.8-alpine
-python:3.9-alpine
+python:3.10-alpine
+python:3.11-alpine
+python:3.12-alpine
+python:3.13-alpine
 
 python:3-slim
-python:3.6-slim
-python:3.7-slim
-python:3.8-slim
-python:3.9-slim
+python:3.10-slim
+python:3.11-slim
+python:3.12-slim
+python:3.13-slim
 
 python:3
-python:3.6
-python:3.7
-python:3.8
-python:3.9
+python:3.10
+python:3.11
+python:3.12
+python:3.13
 
 golang:1-buster

@@ -51,6 +51,17 @@
 [push]
     default = simple
     autoSetupRemote = true
-[user]
-	name = Brad Solomon
-	email = 81818815+brsolomon-deloitte@users.noreply.github.com
+# [user] is intentionally omitted — set per-machine via `git config --global`.
+# bootstrap.sh prompts for user.name / user.email on first run.
+[credential "https://github.com"]
+	helper =
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !gh auth git-credential
+# Always use SSH for GitHub, even when a remote is cloned via https://
+# (including pre-commit's internal clones of hook repos).
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[url "git@gist.github.com:"]
+	insteadOf = https://gist.github.com/

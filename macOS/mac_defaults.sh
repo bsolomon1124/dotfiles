@@ -4,9 +4,10 @@
 # https://ss64.com/osx/defaults.html
 # https://ss64.com/osx/syntax-defaults.html
 
-# Close any open System Preferences panes, to prevent them from overriding
-# settings we’re about to change
-osascript -e 'tell application "System Preferences" to quit'
+# Close any open System Settings panes, to prevent them from overriding
+# settings we’re about to change. Renamed from "System Preferences" in macOS 13.
+osascript -e 'tell application "System Settings" to quit' 2>/dev/null || \
+    osascript -e 'tell application "System Preferences" to quit' 2>/dev/null || true
 osascript -e 'tell application "Finder" to quit' || killall Finder || true
 
 # -----------------------------------------------------------------------------

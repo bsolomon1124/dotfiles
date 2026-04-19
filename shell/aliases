@@ -1,8 +1,5 @@
-#!/usr/bin/env bash
-
-#
-# Useful aliases; use `alias` with no args to list these
-#
+# Shell-agnostic aliases (sourced from bash and zsh).
+# Use `alias` with no args to list these.
 
 # Set an alias only if it does not already exist.
 # N.B.: alias exit Status: alias returns true unless a NAME is supplied for which no alias has been set
@@ -19,10 +16,10 @@ function safe_alias()
 }
 
 # Idiocy prevention
-safe_alias rm 'rm -i'
-safe_alias cp 'cp -i'
-safe_alias mv 'mv -i'
-safe_alias mkdir 'mkdir -p'
+# safe_alias rm 'rm -i'
+# safe_alias cp 'cp -i'
+# safe_alias mv 'mv -i'
+# safe_alias mkdir 'mkdir -p'
 
 # Use ANSI color sequences to distinguish file types
 CLICOLOR=1
@@ -80,17 +77,16 @@ fi
 command -v tree > /dev/null \
     && safe_alias pytree 'tree -P "*.py" -F --prune'
 
-if [[ -x "$(command -v python)" ]]; then
+if [[ -x "$(command -v python3)" ]]; then
     safe_alias pyq "python3 -q"
     safe_alias py3 'python3'
-    safe_alias py2 'python2 -tt'
-    safe_alias venv 'python -m venv venv && . ./venv/bin/activate'
+    safe_alias venv 'python3 -m venv venv && . ./venv/bin/activate'
 fi
 
 safe_alias pygrep 'grep --include \\*.py'
 command -v ipython > /dev/null && safe_alias ipy 'ipython'
 
-safe_alias is_priv_ip 'python -c "import ipaddress, sys; print(ipaddress.ip_address(sys.argv[1]).is_private)"'
+safe_alias is_priv_ip 'python3 -c "import ipaddress, sys; print(ipaddress.ip_address(sys.argv[1]).is_private)"'
 
 safe_alias utc 'date --utc 2> /dev/null || date -u'
 
