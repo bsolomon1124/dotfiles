@@ -51,8 +51,11 @@
 [push]
     default = simple
     autoSetupRemote = true
-# [user] is intentionally omitted — set per-machine via `git config --global`.
-# bootstrap.sh prompts for user.name / user.email on first run.
+# [user] lives in ~/.gitconfig.local (untracked, per-machine) via the
+# [include] below. bootstrap.sh prompts and writes it there on first run.
+# The include is silent if the file doesn't exist.
+[include]
+	path = ~/.gitconfig.local
 [credential "https://github.com"]
 	helper =
 	helper = !gh auth git-credential

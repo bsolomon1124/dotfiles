@@ -78,17 +78,20 @@ if prompt_yesno "Symlink Git configuration?"; then
         ln -vfs "${CONFIG_PATH}/git/.gitignore_global" "${HOME}/.gitignore_global"
         ln -vfs "${CONFIG_PATH}/git/.gitconfig" "${HOME}/.gitconfig"
         echo
-        if ! git config --global --get user.email > /dev/null; then
-            read -r -p "Git global user.email: " GIT_CONFIG_USER_EMAIL
+        # Write identity to ~/.gitconfig.local (untracked, per-machine), not
+        # --global, because ~/.gitconfig is a symlink into this repo.
+        local_gitconfig="${HOME}/.gitconfig.local"
+        if ! git config --get user.email > /dev/null; then
+            read -r -p "Git user.email: " GIT_CONFIG_USER_EMAIL
             set -x
-            git config --global user.email "$GIT_CONFIG_USER_EMAIL"
+            git config --file "$local_gitconfig" user.email "$GIT_CONFIG_USER_EMAIL"
             set +x
         fi
-        if ! git config --global --get user.name > /dev/null; then
+        if ! git config --get user.name > /dev/null; then
             default_name="$(id -F)"
-            read -r -p "Git global user.name (default '$default_name'): " GIT_CONFIG_USER_NAME
+            read -r -p "Git user.name (default '$default_name'): " GIT_CONFIG_USER_NAME
             set -x
-            git config --global user.name "${GIT_CONFIG_USER_NAME:-$default_name}"
+            git config --file "$local_gitconfig" user.name "${GIT_CONFIG_USER_NAME:-$default_name}"
             set +x
         fi
     fi
